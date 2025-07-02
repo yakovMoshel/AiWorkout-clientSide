@@ -1,0 +1,73 @@
+/* src/styles/DashboardPage.module.css */
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.card {
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.navButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.navButton:hover {
+  background-color: #388e3c;
+}
+
+.weekTracker {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.dayBox {
+  background-color: #fff;
+  padding: 0.6rem;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.875rem;
+}
+
+.completed {
+  display: block;
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
