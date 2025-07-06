@@ -4,8 +4,10 @@ import styles from '../styles/MainNavigation.module.css'
 
 const navLinks = [
     { to: "/", label: "HOME" },
+    { to: "/explore-exercises", label: "Explore Exercises" },
     { to: "/profile", label: "Profile" },
-    { to: "/AiCoach", label: "AI Coach" }
+    { to: "/AiCoach", label: "AI Coach" },
+    
 ];
 
 export default function MainNavigations() {
