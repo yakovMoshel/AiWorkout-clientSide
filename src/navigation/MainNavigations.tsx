@@ -7,6 +7,8 @@ const navLinks = [
     { to: "/explore-exercises", label: "Explore Exercises" },
     { to: "/profile", label: "Profile" },
     { to: "/AiCoach", label: "AI Coach" },
+    { to: "/login", label: "Login" },
+    { to: "/register", label: "Register" }
     
 ];
 

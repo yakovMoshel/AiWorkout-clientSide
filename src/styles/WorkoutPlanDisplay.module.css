@@ -1,0 +1,96 @@
+/* src/styles/WorkoutPlanDisplay.module.css */
+
+.container {
+  margin-top: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.description {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card {
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.navigationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dayTitle {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #0070f3;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.dayTitle.active {
+  color: #0051a3;
+  text-shadow: 0 0 5px rgba(0, 112, 243, 0.7);
+}
+
+
+.exerciseList {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.exerciseItem {
+  padding: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+.exerciseItem:last-child {
+  border-bottom: none;
+}
+
+.dayIndicators {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.indicator,
+.indicatorActive {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 4px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.3s ease;
+}
+.indicator {
+  background: #ccc;
+}
+
+.indicatorActive {
+  background: #0070f3;
+}

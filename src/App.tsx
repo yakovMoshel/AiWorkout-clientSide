@@ -3,6 +3,8 @@ import Home from './pages/Home';
 import SetupPage from './pages/SetUp';
 import MainLayout from './components/templates/main-layout';
 import ExploreExercisesPage from './pages/ExploreExercisesPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 // import ErrorPage from './pages/ErrorPage';
 
 
@@ -21,6 +23,14 @@ const router = createBrowserRouter([{
   {
     path: '/explore-exercises',
     element: <ExploreExercisesPage />
+  },
+  {
+    path: '/login',
+    element: <LoginPage/>
+  },
+  {
+    path: '/register',
+    element: <RegisterPage />
   }
     // {
     //   path: '/AiCoach',
