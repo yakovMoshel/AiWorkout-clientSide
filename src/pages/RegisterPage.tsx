@@ -1,6 +1,10 @@
+"use client";
 import { useState } from "react";
-import styles from "../styles/LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
+import styles from "../styles/LoginPage.module.css";
+import InputField from "../components/atoms/InputField";
+import api from "../utils/api"; // אתה כבר מייבא את axios פה
+import { validateRegisterForm } from "../utils/validateForm";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -10,80 +14,98 @@ export default function RegisterPage() {
     password: "",
     confirmPassword: "",
   });
-
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+    general?: string;
+  }>({});
+  const [loading, setLoading] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setErrors({});
 
-    const { name, email, password, confirmPassword } = form;
+    const errors = validateRegisterForm(form);
+    setErrors(errors);
+    if (Object.keys(errors).length > 0) return;
 
-    if (!name || !email || !password || !confirmPassword) {
-      setError("Please fill in all fields.");
-      return;
+    try {
+      setLoading(true);
+      await api.post("/auth/register", {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+      });
+      navigate("/setup");
+    } catch (err: any) {
+      const message =
+        err?.response?.data?.message || "Registration failed. Please try again.";
+      setErrors({ general: message });
+    } finally {
+      setLoading(false);
     }
-
-    if (password !== confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
-
-    // בעתיד נשלב API להרשמה
-    console.log("Registration submitted:", form);
-    setError("");
-    navigate("/dashboard");
   }
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form} autoComplete="on">
         <h2 className={styles.title}>Register</h2>
 
-        {error && <p className={styles.error}>{error}</p>}
+        {errors.general && <p className={styles.error}>{errors.general}</p>}
 
-        <input
+        {errors.name && <p className={styles.error}>{errors.name}</p>}
+        <InputField
           type="text"
           name="name"
           placeholder="Name"
-          className={styles.input}
           value={form.name}
           onChange={handleChange}
+          className={styles.input}
+          autoComplete="name"
         />
 
-        <input
+        {errors.email && <p className={styles.error}>{errors.email}</p>}
+        <InputField
           type="email"
           name="email"
           placeholder="Email"
-          className={styles.input}
           value={form.email}
           onChange={handleChange}
+          className={styles.input}
+          autoComplete="email"
         />
 
-        <input
+        {errors.password && <p className={styles.error}>{errors.password}</p>}
+        <InputField
           type="password"
           name="password"
           placeholder="Password"
-          className={styles.input}
           value={form.password}
           onChange={handleChange}
+          className={styles.input}
+          autoComplete="new-password"
         />
 
-        <input
+        {errors.confirmPassword && <p className={styles.error}>{errors.confirmPassword}</p>}
+        <InputField
           type="password"
           name="confirmPassword"
           placeholder="Confirm Password"
-          className={styles.input}
           value={form.confirmPassword}
           onChange={handleChange}
+          className={styles.input}
+          autoComplete="new-password"
         />
 
-        <button type="submit" className={styles.button}>
-          Register
+        <button type="submit" className={styles.button} disabled={loading}>
+          {loading ? "Registering..." : "Register"}
         </button>
       </form>
     </div>

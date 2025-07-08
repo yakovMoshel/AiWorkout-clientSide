@@ -16,7 +16,6 @@ export default function LoginFormFields({ error }: LoginFormFieldsProps) {
         placeholder="Email"
         autoComplete="email"
         className={styles.input}
-        required
       />
       <InputField
         type="password"
@@ -24,7 +23,6 @@ export default function LoginFormFields({ error }: LoginFormFieldsProps) {
         placeholder="Password"
         autoComplete="current-password"
         className={styles.input}
-        required
       />
     </>
   );
