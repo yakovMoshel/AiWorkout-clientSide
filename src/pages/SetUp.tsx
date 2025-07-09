@@ -78,7 +78,7 @@ export default function SetupPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     await submitAction(formData);
-    navigate("/dashboard");
+    navigate("/");
   }
 
   return (

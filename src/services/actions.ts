@@ -1,16 +1,40 @@
-export async function fakeLoginAction(prevState: any, formData: FormData) {
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+import api from '../utils/api';
+
+export async function loginAction(prevState: any, formData: { email: string; password: string }) {
+  const email = formData.email;
+  const password = formData.password;
 
   if (!email || !password) {
-    return { error: "All fields are required.", values: { email, password } };
+    return { error: "Please fill in all fields" };
   }
+  try {
+    const res = await api.post('/auth/login', { email, password });
+    const token = res.data.token;
+    if (!token) return { error: "No token received" };
 
-  // כאן אפשר להחליף ל-fetch לשרת אמיתי
-  if (email === "test@example.com" && password === "123456") {
-    // נניח הצלחה, בהמשך נוכל להפעיל redirect
-    return { error: "", values: { email, password }, redirect: "/" };
+    localStorage.setItem("token", token); 
+
+    return { error: "", token };
+  } catch (err: any) {
+    return { error: err?.response?.data?.message || "Login failed" };
   }
+}
 
-  return { error: "Invalid credentials.", values: { email, password } };
+export async function registerAction(prevState: any, formData: { name: string; email: string; password: string }) {
+  const { name, email, password } = formData;
+
+  if (!name || !email || !password) {
+    return { error: "Please fill in all fields" };
+  }
+  try {
+    const res = await api.post('/auth/register', { name, email, password });
+    const token = res.data.token;
+    if (!token) return { error: "No token received" };
+
+    localStorage.setItem("token", token); 
+
+    return { error: "", token };
+  } catch (err: any) {
+    return { error: err?.response?.data?.message || "Registration failed" };
+  }
 }

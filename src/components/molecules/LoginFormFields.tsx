@@ -3,9 +3,12 @@ import styles from "../../styles/LoginPage.module.css";
 
 interface LoginFormFieldsProps {
   error: string;
+  form: { email: string; password: string };
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function LoginFormFields({ error }: LoginFormFieldsProps) {
+
+export default function LoginFormFields({ onChange, error, form }: LoginFormFieldsProps) {
   return (
     <>
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -16,6 +19,9 @@ export default function LoginFormFields({ error }: LoginFormFieldsProps) {
         placeholder="Email"
         autoComplete="email"
         className={styles.input}
+        value={form.email}
+        onChange={onChange}
+        
       />
       <InputField
         type="password"
@@ -23,6 +29,8 @@ export default function LoginFormFields({ error }: LoginFormFieldsProps) {
         placeholder="Password"
         autoComplete="current-password"
         className={styles.input}
+        value={form.password}
+        onChange={onChange}
       />
     </>
   );

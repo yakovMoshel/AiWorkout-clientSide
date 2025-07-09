@@ -1,20 +1,27 @@
 "use client";
-import { useFormState } from "react-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../styles/LoginPage.module.css";
 import LoginForm from "../components/organisms/LoginForm";
-import { fakeLoginAction } from "../services/actions";
-
-// מבנה ההחזרה מ-action
-const initialState = {
-  error: "",
-};
+import { loginAction } from "../services/actions";
 
 export default function LoginPage() {
-  const [formState, formAction] = useFormState(fakeLoginAction, initialState);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  async function handleLogin(formData: { email: string; password: string }) {
+    const res = await loginAction({}, formData); 
+    if (res.error) {
+      setError(res.error);
+    } else {
+      setError("");
+      navigate("/");
+    }
+  }
 
   return (
     <div className={styles.container}>
-      <LoginForm error={formState.error} action={formAction} />
+      <LoginForm error={error} onSubmit={handleLogin} />
     </div>
   );
 }

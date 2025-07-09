@@ -5,6 +5,8 @@ import MainLayout from './components/templates/main-layout';
 import ExploreExercisesPage from './pages/ExploreExercisesPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import ProtectedRoute from './utils/ProtectedRoute';
+import { logout, tokenLoaders } from './utils/auth';
 // import ErrorPage from './pages/ErrorPage';
 
 
@@ -12,25 +14,37 @@ const router = createBrowserRouter([{
   path: '/',
   element: <MainLayout />,
   // errorElement: <ErrorPage />,
+  id: 'root',
+  loader: tokenLoaders,
   children: [{
     path: '/',
     element: <Home />
   },
   {
     path: '/setup',
-    element: <SetupPage />
+    element:
+      <ProtectedRoute>
+        <SetupPage />
+      </ProtectedRoute>
   },
   {
     path: '/explore-exercises',
-    element: <ExploreExercisesPage />
+    element:
+      <ProtectedRoute>
+        <ExploreExercisesPage />
+      </ProtectedRoute>
   },
   {
     path: '/login',
-    element: <LoginPage/>
+    element: <LoginPage />
   },
   {
     path: '/register',
     element: <RegisterPage />
+  },
+  {
+    path:'/logout',
+    action:logout  
   }
     // {
     //   path: '/AiCoach',

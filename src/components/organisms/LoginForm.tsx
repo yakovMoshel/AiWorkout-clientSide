@@ -3,19 +3,21 @@ import styles from "../../styles/LoginPage.module.css";
 import Button from "../atoms/Button";
 import { useFormStatus } from "react-dom";
 import { Link } from "react-router-dom";
+import { useLoginForm } from "../../hooks/useLoginForm";
 
 interface LoginFormProps {
   error: string;
-  action: (formData: FormData) => void;
+  onSubmit: (formData: { email: string; password: string }) => void;
 }
 
-export default function LoginForm({ error, action }: LoginFormProps) {
+export default function LoginForm({ error, onSubmit }: LoginFormProps) {
   const { pending } = useFormStatus();
+  const { form, handleChange, handleSubmit } = useLoginForm(onSubmit);
 
   return (
-    <form action={action} method="post" className={styles.form}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <h3 className={styles.title}>Login</h3>
-      <LoginFormFields error={error} />
+      <LoginFormFields error={error} onChange={handleChange} form={form} />
       <Button type="submit" disabled={pending} className={styles.button}>
         {pending ? "Logging in..." : "Login"}
       </Button>
