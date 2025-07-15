@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useActionState, useState } from "react";
+import { useState } from "react";
 import SetupForm from "../components/organisms/SetupForm";
+import { requestWorkoutPlan } from "../services/actions";
 
 interface FormData {
   gender: string;
@@ -28,13 +29,7 @@ export default function SetupPage() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState<FormData>(initialState);
-
-  const [, submitAction, pending] = useActionState(
-    async (_: FormData, formData: FormData) => {
-      return formData;
-    },
-    formData
-  );
+  const [loading, setLoading] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -77,15 +72,28 @@ export default function SetupPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await submitAction(formData);
-    navigate("/");
+    setLoading(true);
+
+    try {
+      await requestWorkoutPlan({
+        ...formData,
+        age: Number(formData.age),
+        height: Number(formData.height),
+        weight: Number(formData.weight),
+      });
+      navigate("/");
+    } catch (err: any) {
+      alert(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <SetupForm
       step={step}
       formData={formData}
-      pending={pending}
+      pending={loading}
       onChange={handleChange}
       onDaysChange={handleDaysChange}
       onNext={handleNext}
