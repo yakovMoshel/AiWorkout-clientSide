@@ -1,13 +1,6 @@
+import { TabsProps } from "../../domain/models/interfaces/ITabsProps";
 import Button from "../atoms/Button";
 
-interface TabsProps {
-  tabs: string[];
-  activeTab: string;
-  onTabClick: (tab: string) => void;
-  className?: string;
-  tabClassName?: string;
-  activeTabClassName?: string;
-}
 
 export default function Tabs({ tabs, activeTab, onTabClick, className, tabClassName, activeTabClassName }: TabsProps) {
   return (

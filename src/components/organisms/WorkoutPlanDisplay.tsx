@@ -1,12 +1,8 @@
 import { useState } from "react";
 import styles from "../../styles/WorkoutPlanDisplay.module.css";
+import { WorkoutPlanDisplayProps } from "../../domain/models/interfaces/IWorkoutPlanDisplayProps";
 
-interface WorkoutPlanDisplayProps {
-  plan: {
-    description?: string;
-    workouts: { exercises: string[] }[];
-  };
-}
+
 
 // קומפוננטה זו אחראית להציג את תוצאות תוכנית האימונים שחזרה מה-API
 export default function WorkoutPlanDisplay({ plan }: WorkoutPlanDisplayProps) {

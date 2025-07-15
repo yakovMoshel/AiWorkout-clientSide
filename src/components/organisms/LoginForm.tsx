@@ -4,11 +4,9 @@ import Button from "../atoms/Button";
 import { useFormStatus } from "react-dom";
 import { Link } from "react-router-dom";
 import { useLoginForm } from "../../hooks/useLoginForm";
+import { LoginFormProps } from "../../domain/models/interfaces/ILoginFormProps";
 
-interface LoginFormProps {
-  error: string;
-  onSubmit: (formData: { email: string; password: string }) => void;
-}
+
 
 export default function LoginForm({ error, onSubmit }: LoginFormProps) {
   const { pending } = useFormStatus();

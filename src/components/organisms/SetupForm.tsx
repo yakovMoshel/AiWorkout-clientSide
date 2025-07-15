@@ -6,17 +6,9 @@ import SelectField from "../atoms/SelectField";
 import TextAreaField from "../atoms/TextAreaField";
 import StepButton from "../atoms/StepButton";
 import styles from "../../styles/SetupPage.module.css";
+import { SetupFormProps } from "../../domain/models/interfaces/ISetupFormProps";
 
-interface SetupFormProps {
-  step: number;
-  formData: any;
-  pending: boolean;
-  onChange: (e: React.ChangeEvent<any>) => void;
-  onDaysChange: (day: string) => void;
-  onNext: () => void;
-  onBack: () => void;
-  onSubmit: (e: React.FormEvent) => void;
-}
+
 
 const questions = [
   {

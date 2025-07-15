@@ -1,7 +1,7 @@
 import React from "react";
+import { TextAreaFieldProps } from "../../domain/models/interfaces/ITextAreaFieldProps";
 
-interface TextAreaFieldProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 export default function TextAreaField(props: TextAreaFieldProps) {
-  return <textarea {...props} />;
+  return <textarea {...props} style={{ resize: "vertical" }} />;
 }

@@ -1,6 +1,6 @@
 import React from "react";
+import { InputFieldProps } from "../../domain/models/interfaces/IInputFieldProps";
 
-interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 export default function InputField(props: InputFieldProps) {
   return <input {...props} />;

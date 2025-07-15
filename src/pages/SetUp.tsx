@@ -2,17 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SetupForm from "../components/organisms/SetupForm";
 import { requestWorkoutPlan } from "../services/actions";
+import { FormData } from "../domain/models/interfaces/IFormData";
 
-interface FormData {
-  gender: string;
-  age: string;
-  height: string;
-  weight: string;
-  goal: string;
-  experience: string;
-  trainingDays: string[];
-  healthNotes: string;
-}
+
 
 const initialState: FormData = {
   gender: "",

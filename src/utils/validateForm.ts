@@ -1,17 +1,5 @@
-export interface RegisterForm {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { RegisterForm, RegisterFormErrors } from "../domain/models/interfaces/IRegisterForm";
 
-export interface RegisterFormErrors {
-  name?: string;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-  general?: string;
-}
 
 export function validateRegisterForm(form: RegisterForm): RegisterFormErrors {
   const errors: RegisterFormErrors = {};
