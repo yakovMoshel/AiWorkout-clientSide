@@ -1,10 +1,8 @@
 import React from "react";
 import styles from "../../styles/SetupPage.module.css";
+import { TrainingDaysSelectorProps } from "../../domain/models/interfaces/ITrainingDaysSelectorProps";
 
-interface TrainingDaysSelectorProps {
-  selectedDays: string[];
-  onToggle: (day: string) => void;
-}
+
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 

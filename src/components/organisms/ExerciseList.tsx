@@ -1,17 +1,5 @@
+import { ExerciseListProps } from "../../domain/models/interfaces/IExerciseListProps";
 import ExerciseCard from "./ExerciseCard";
-
-interface Exercise {
-  id: string;
-  name: string;
-  bodyPart: string;
-  equipment: string;
-  gifUrl: string;
-}
-
-interface ExerciseListProps {
-  exercises: Exercise[];
-  className?: string;
-}
 
 export default function ExerciseList({ exercises, className }: ExerciseListProps) {
   return (

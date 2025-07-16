@@ -1,31 +1,30 @@
 import WeekTracker from "../molecules/WeekTracker";
 import WorkoutCard from "../molecules/WorkoutCard";
 import WorkoutPlanDisplay from "../organisms/WorkoutPlanDisplay";
-
-// דוגמה ל-plan
-const plan = {
-  description: "This is your weekly workout plan. Good luck!",
-  workouts: [
-    { exercises: ["Push-ups", "Squats", "Plank"] },
-    { exercises: ["Pull-ups", "Lunges", "Crunches"] },
-    { exercises: ["Rest or light cardio"] },
-    { exercises: ["Burpees", "Deadlifts", "Leg Raises"] },
-    { exercises: ["Bench Press", "Rows", "Bicycle Crunches"] },
-    { exercises: ["Cardio (running, cycling, etc.)"] },
-    { exercises: ["Yoga or Stretching"] },
-  ],
-};
-
-const todayIdx = 0; // אפשר לחשב לפי תאריך
+import { useWorkoutPlan } from "../../hooks/useWorkoutPlan";
+import { mapPlanForDisplay } from "../../utils/mapWorkoutPlan";
 
 export default function HomeSections() {
+  const { workouts, loading, error } = useWorkoutPlan();
+
+  const today = new Date().toLocaleString("en-US", { weekday: "long" });
+  // const today =  'Thursday'
+  const todayWorkout = workouts.find(
+    (w) => w.day.toLowerCase() === today.toLowerCase()
+  );
+
+  const mappedPlan = mapPlanForDisplay(workouts);
+
+  if (loading) return <div>Loading workout plan...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <>
       <WorkoutCard
-        exercises={plan.workouts[todayIdx]?.exercises || []}
-        dayNumber={todayIdx + 1}
+        exercises={todayWorkout?.exercises.map((e) => e.name) || []}
+        dayNumber={todayWorkout ? workouts.indexOf(todayWorkout) + 1 : undefined}
       />
-      <WorkoutPlanDisplay plan={plan} />
+      <WorkoutPlanDisplay plan={mappedPlan} />
       <WeekTracker />
     </>
   );

@@ -2,12 +2,9 @@ import InputField from "../atoms/InputField";
 import styles from "../../styles/LoginPage.module.css";
 import Button from "../atoms/Button";
 import { useRegisterForm } from "../../hooks/useRegisterForm";
+import { RegisterFormProps } from "../../domain/models/interfaces/IRegisterFormProps";
 
-interface RegisterFormProps {
-  loading: boolean;
-  onSubmit: (form: any) => Promise<void>;
-  error: string;
-}
+
 
 export default function RegisterForm({ loading, onSubmit, error }: RegisterFormProps) {
   const { form, errors, handleChange, handleSubmit } = useRegisterForm(onSubmit);

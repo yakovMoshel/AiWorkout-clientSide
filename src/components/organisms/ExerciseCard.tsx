@@ -1,19 +1,10 @@
 import { useState } from "react";
 import styles from "../../styles/ExerciseCard.module.css";
+import { PropsExercise } from "../../domain/models/interfaces/IExercise";
 
-interface Exercise {
-  id: string;
-  name: string;
-  bodyPart: string;
-  equipment: string;
-  gifUrl: string;
-}
 
-interface Props {
-  exercise: Exercise;
-}
 
-export default function ExerciseCard({ exercise }: Props) {
+export default function ExerciseCard({ exercise }: PropsExercise) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const toggleFavorite = () => {

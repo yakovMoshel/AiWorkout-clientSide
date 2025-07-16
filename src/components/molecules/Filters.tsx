@@ -1,15 +1,7 @@
+import { ExerciseFiltersProps } from "../../domain/models/interfaces/IExerciseFiltersProps";
 import InputField from "../atoms/InputField";
 import SelectField from "../atoms/SelectField";
 
-interface ExerciseFiltersProps {
-  searchTerm: string;
-  onSearchChange: (value: string) => void;
-  equipmentFilter: string;
-  onEquipmentChange: (value: string) => void;
-  className?: string;
-  inputClassName?: string;
-  selectClassName?: string;
-}
 
 export default function ExerciseFilters({
   searchTerm,

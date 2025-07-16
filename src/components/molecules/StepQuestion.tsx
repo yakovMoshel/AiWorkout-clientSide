@@ -1,9 +1,7 @@
 import React from "react";
+import { StepQuestionProps } from "../../domain/models/interfaces/IStepQuestionProps";
 
-interface StepQuestionProps {
-  label: string;
-  input: React.ReactNode;
-}
+
 
 export default function StepQuestion({ label, input }: StepQuestionProps) {
   return (

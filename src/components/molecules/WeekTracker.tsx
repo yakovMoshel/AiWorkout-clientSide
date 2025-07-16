@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 import styles from "../../styles/HomePage.module.css";
 import DayBox from "../atoms/DayBox";
 
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+export const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export default function WeekTracker() {
   return (

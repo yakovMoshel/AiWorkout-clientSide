@@ -1,12 +1,10 @@
 import React from "react";
 import styles from "../../styles/HomePage.module.css";
+import { WorkoutCardProps } from "../../domain/models/interfaces/IWorkoutCardProps";
 
-interface WorkoutCardProps {
-  exercises: string[];
-  dayNumber?: number;
-}
 
-export default function WorkoutCard({ exercises, dayNumber }: WorkoutCardProps) {
+
+export default function WorkoutCard({ exercises, dayNumber  }: WorkoutCardProps) {
   return (
     <section className={styles.card}>
       <h2 className={styles.sectionTitle}>

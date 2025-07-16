@@ -1,8 +1,7 @@
 import React from "react";
+import { SelectFieldProps } from "../../domain/models/interfaces/ISelectFieldProps";
 
-interface SelectFieldProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  options: { value: string; label: string }[];
-}
+
 
 export default function SelectField({ options, ...props }: SelectFieldProps) {
   return (

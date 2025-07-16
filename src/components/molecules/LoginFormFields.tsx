@@ -1,11 +1,7 @@
 import InputField from "../atoms/InputField";
 import styles from "../../styles/LoginPage.module.css";
+import { LoginFormFieldsProps } from "../../domain/models/interfaces/ILoginFormFieldsProps";
 
-interface LoginFormFieldsProps {
-  error: string;
-  form: { email: string; password: string };
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
 
 
 export default function LoginFormFields({ onChange, error, form }: LoginFormFieldsProps) {
