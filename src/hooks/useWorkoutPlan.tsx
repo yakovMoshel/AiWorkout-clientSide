@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Exercise } from "../domain/models/interfaces/IExercise";
 import api from "../utils/api";
+import { useAuth } from "../store/auth-context";
 
 export interface WorkoutDay {
   day: string;
@@ -12,19 +13,20 @@ export function useWorkoutPlan() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+    const { isAuthenticated } = useAuth();
+
+
   useEffect(() => {
+    if (!isAuthenticated) {
+      setError("User not authenticated");
+      setLoading(false);
+      return;
+    }
+
     const fetchPlan = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setError("No token found");
-        setLoading(false);
-        return;
-      }
       try {
         const res = await api.get("/setup/workout", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          withCredentials: true,
         });
 
         const fetchedWorkouts = res.data.workoutPlan?.result?.exercises;
@@ -45,8 +47,7 @@ export function useWorkoutPlan() {
     };
 
     fetchPlan();
-  }, []);
-
+  }, [isAuthenticated]);
 
   return { workouts, loading, error };
 }

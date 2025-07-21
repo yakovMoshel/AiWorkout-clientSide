@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/LoginPage.module.css";
 import RegisterForm from "../components/organisms/RegisterForm";
-import { registerAction } from "../services/actions";
+import { registerAction } from "../services/authService";
 
 export default function RegisterPage() {
   const navigate = useNavigate();

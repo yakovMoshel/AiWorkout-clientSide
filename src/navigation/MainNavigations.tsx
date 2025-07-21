@@ -1,16 +1,17 @@
-import { Form, NavLink, useRouteLoaderData } from 'react-router-dom'
+import { Form, NavLink } from 'react-router-dom'
 import styles from '../styles/MainNavigation.module.css'
+import { useAuth } from '../store/auth-context';
 
 export default function MainNavigations() {
-  const token = useRouteLoaderData('root') as string | null;
+  const { isAuthenticated } = useAuth();
 
-  const navLinks = [
+   const navLinks = [
     { to: "/", label: "HOME" },
-    ...(token ? [
+    ...(isAuthenticated ? [
       { to: "/explore-exercises", label: "Explore Exercises" },
-    //   { to: "/setup", label: "Set Up" },
-    //   { to: "/AiCoach", label: "AI Coach" },
-    //   { to: "/profile", label: "Profile" },
+      // { to: "/setup", label: "Set Up" },
+      // { to: "/AiCoach", label: "AI Coach" },
+      // { to: "/profile", label: "Profile" },
     ] : [
       { to: "/login", label: "Login" },
       { to: "/register", label: "Register" },
@@ -32,7 +33,7 @@ export default function MainNavigations() {
           </li>
         ))}
 
-        {token && (
+        {isAuthenticated && (
           <li>
             <Form method="post" action="/logout">
               <button type="submit" className={styles.navLink}>

@@ -1,11 +1,21 @@
-import { Navigate } from "react-router-dom";
-import { JSX } from "react/jsx-runtime";
+import { Navigate, useLocation } from 'react-router-dom';
+import { JSX } from 'react';
+import { useAuth } from '../store/auth-context';
 
-export default function ProtectedRoute({ children }: { children: JSX.Element }) {
-  const token = localStorage.getItem("token");
+type Props = {
+  children: JSX.Element;
+};
 
-  if (!token) {
-    return <Navigate to="/login" replace />;
+export default function ProtectedRoute({ children }: Props) {
+  const { isAuthenticated, loading } = useAuth();
+  const location = useLocation();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   return children;

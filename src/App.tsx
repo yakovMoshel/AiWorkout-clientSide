@@ -6,7 +6,8 @@ import ExploreExercisesPage from './pages/ExploreExercisesPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProtectedRoute from './utils/ProtectedRoute';
-import { logout, tokenLoaders } from './utils/auth';
+import { logout } from './utils/auth';
+import { AuthProvider } from './store/auth-context';
 // import ErrorPage from './pages/ErrorPage';
 
 
@@ -15,7 +16,6 @@ const router = createBrowserRouter([{
   element: <MainLayout />,
   // errorElement: <ErrorPage />,
   id: 'root',
-  loader: tokenLoaders,
   children: [{
     path: '/',
     element: <Home />
@@ -56,7 +56,9 @@ const router = createBrowserRouter([{
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
 

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SetupForm from "../components/organisms/SetupForm";
-import { requestWorkoutPlan } from "../services/actions";
 import { FormData } from "../domain/models/interfaces/IFormData";
+import { requestWorkoutPlan } from "../services/workoutService";
 
 
 
