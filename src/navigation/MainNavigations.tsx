@@ -1,9 +1,9 @@
-import { Form, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styles from '../styles/MainNavigation.module.css'
 import { useAuth } from '../store/auth-context';
 
 export default function MainNavigations() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated,logout } = useAuth();
 
    const navLinks = [
     { to: "/", label: "HOME" },
@@ -35,11 +35,9 @@ export default function MainNavigations() {
 
         {isAuthenticated && (
           <li>
-            <Form method="post" action="/logout">
-              <button type="submit" className={styles.navLink}>
+              <button onClick={logout} className={styles.navLink}>
                 Logout
               </button>
-            </Form>
           </li>
         )}
       </ul>

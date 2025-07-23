@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { getCurrentUser, logoutUser } from "../utils/authClient";
 
 export interface User {
   id: string;
@@ -31,33 +32,31 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchUser = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch("/auth/user", { credentials: "include" });
-      if (res.ok) {
-        const data = await res.json();
-        console.log(data)
-        setUser(data.user);
-      } else {
-        setUser(null);
-        setError("User not authenticated");
-      }
-    } catch (err: any) {
-      setUser(null);
-      setError(err?.message || "Failed to fetch user");
-      console.error("AuthContext fetchUser error:", err);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const logout = useCallback(() => {
+const fetchUser = useCallback(async () => {
+  setLoading(true);
+  setError(null);
+  try {
+    const data = await getCurrentUser();
+    setUser(data.user);
+  } catch (err) {
     setUser(null);
+    setError("User not authenticated");
+  } finally {
+    setLoading(false);
+  }
+}, []);
+
+const logout = useCallback(async () => {
+  try {
+    await logoutUser();  
+  } catch (err) {
+    console.error('Logout failed', err);
+  } finally {
+    setUser(null);      
     localStorage.removeItem("token");
-    window.location.href = "/";
-  }, []);
+    window.location.href = "/"; 
+  }
+}, []);
 
   useEffect(() => {
     fetchUser();

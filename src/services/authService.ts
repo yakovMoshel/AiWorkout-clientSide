@@ -5,14 +5,11 @@ export async function loginAction(
   formData: { email: string; password: string }
 ) {
   const { email, password } = formData;
-
   if (!email || !password) {
     return { error: "Please fill in all fields" };
   }
-
   try {
     await api.post('/auth/login', { email, password }, { withCredentials: true });
-
     return { error: "" }; 
   } catch (err: any) {
     return { error: err?.response?.data?.message || "Login failed" };
@@ -28,10 +25,8 @@ export async function registerAction(
   if (!name || !email || !password) {
     return { error: "Please fill in all fields" };
   }
-
   try {
     await api.post('/auth/register', { name, email, password }, { withCredentials: true });
-
     return { error: "" };
   } catch (err: any) {
     return { error: err?.response?.data?.message || "Registration failed" };
