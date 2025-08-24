@@ -5,6 +5,10 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  age: number;
+  weight: number;
+  goal: string;
+  avatarSrc?: string;
 }
 
 export interface AuthContextType {
@@ -37,6 +41,7 @@ const fetchUser = useCallback(async () => {
   setError(null);
   try {
     const data = await getCurrentUser();
+    
     setUser(data.user);
   } catch (err) {
     setUser(null);
