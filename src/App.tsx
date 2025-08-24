@@ -8,6 +8,8 @@ import RegisterPage from './pages/RegisterPage';
 import ProtectedRoute from './utils/ProtectedRoute';
 import { logout } from './utils/auth';
 import { AuthProvider } from './store/auth-context';
+import Profile from './pages/Profile';
+import EditProfile from './pages/EditProfile';
 // import ErrorPage from './pages/ErrorPage';
 
 
@@ -43,13 +45,23 @@ const router = createBrowserRouter([{
     element: <RegisterPage />
   },
   {
-    path:'/logout',
-    action:logout  
+    path: '/logout',
+    action: logout
+  }, {
+    path: '/profile',
+    element:
+      <ProtectedRoute>
+        <Profile />
+      </ProtectedRoute>,
+  },
+  {
+    path: '/profile/Edit',
+    element: (
+      <ProtectedRoute>
+        <EditProfile />
+      </ProtectedRoute>
+    )
   }
-    // {
-    //   path: '/AiCoach',
-    //   element: <AiCoachPage />
-    // }
   ]
 }
 ])

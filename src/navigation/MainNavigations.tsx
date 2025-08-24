@@ -11,7 +11,7 @@ export default function MainNavigations() {
       { to: "/explore-exercises", label: "Explore Exercises" },
       // { to: "/setup", label: "Set Up" },
       // { to: "/AiCoach", label: "AI Coach" },
-      // { to: "/profile", label: "Profile" },
+      { to: "/profile", label: "Profile" },
     ] : [
       { to: "/login", label: "Login" },
       { to: "/register", label: "Register" },
