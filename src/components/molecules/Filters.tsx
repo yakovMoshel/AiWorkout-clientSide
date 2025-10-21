@@ -2,7 +2,6 @@ import { ExerciseFiltersProps } from "../../domain/models/interfaces/IExerciseFi
 import InputField from "../atoms/InputField";
 import SelectField from "../atoms/SelectField";
 
-
 export default function ExerciseFilters({
   searchTerm,
   onSearchChange,
@@ -18,12 +17,12 @@ export default function ExerciseFilters({
         type="text"
         placeholder="Search exercises..."
         value={searchTerm}
-        onChange={e => onSearchChange(e.target.value)}
+        onChange={(e) => onSearchChange(e.target.value)}
         className={inputClassName}
       />
       <SelectField
         value={equipmentFilter}
-        onChange={e => onEquipmentChange(e.target.value)}
+        onChange={(e) => onEquipmentChange(e.target.value)}
         className={selectClassName}
         options={[
           { value: "", label: "All Equipment" },

@@ -1,5 +1,11 @@
-import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
-import { getCurrentUser, logoutUser } from '../utils/authClient';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
+import { getCurrentUser, logoutUser } from "../utils/authClient";
 import { User } from "../domain/models/interfaces/IUser";
 import { AuthContextType } from "../domain/models/interfaces/IAuthContextType";
 const AuthContext = createContext<AuthContextType>({
@@ -7,8 +13,8 @@ const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   loading: true,
   error: null,
-  refetchUser: async () => { },
-  logout: () => { },
+  refetchUser: async () => {},
+  logout: () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -23,7 +29,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setError(null);
     try {
       const data = await getCurrentUser();
-      console.log('USER IMAGE:', data.user.image);
+      console.log("USER IMAGE:", data.user.image);
       setUser(data.user);
     } catch (err) {
       setUser(null);
@@ -37,7 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       await logoutUser();
     } catch (err) {
-      console.error('Logout failed', err);
+      console.error("Logout failed", err);
     } finally {
       setUser(null);
       window.location.href = "/";

@@ -44,7 +44,9 @@ export default function ExploreExercisesPage() {
       (activeTab === "Recent" && false) ||
       exercise.bodyPart.toLowerCase() === activeTab.toLowerCase();
 
-    const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = exercise.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
     const matchesEquipment =
       !equipmentFilter || exercise.equipment === equipmentFilter;
 

@@ -1,9 +1,9 @@
-import api from '../utils/api';
+import api from "../utils/api";
 
 export async function requestWorkoutPlan(formData: any) {
   try {
     const response = await api.post("/setup/workout", formData, {
-      withCredentials: true
+      withCredentials: true,
     });
 
     if (response.status !== 200) {

@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { refetchUser } = useAuth();
-  
+
   async function handleLogin(formData: { email: string; password: string }) {
     const res = await loginAction({}, formData);
     if (res.error) {

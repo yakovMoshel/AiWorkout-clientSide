@@ -14,16 +14,16 @@ export default function RegisterPage() {
   async function handleRegister(form: any) {
     setGeneralError("");
     try {
-      
       setLoading(true);
       const { error } = await registerAction({}, form);
       if (error) throw new Error(error);
-      
-      await refetchUser();  
+
+      await refetchUser();
       navigate("/setup");
     } catch (err: any) {
       const message =
-        err?.response?.data?.message || "Registration failed. Please try again.";
+        err?.response?.data?.message ||
+        "Registration failed. Please try again.";
       setGeneralError(message);
     } finally {
       setLoading(false);
@@ -32,7 +32,11 @@ export default function RegisterPage() {
 
   return (
     <div className={styles.container}>
-      <RegisterForm loading={loading} onSubmit={handleRegister} error={generalError} />
+      <RegisterForm
+        loading={loading}
+        onSubmit={handleRegister}
+        error={generalError}
+      />
     </div>
   );
 }

@@ -4,8 +4,6 @@ import SetupForm from "../components/organisms/SetupForm";
 import { FormData } from "../domain/models/interfaces/IFormData";
 import { requestWorkoutPlan } from "../services/workoutService";
 
-
-
 const initialState: FormData = {
   gender: "",
   age: "",
@@ -23,13 +21,17 @@ export default function SetupPage() {
   const [formData, setFormData] = useState<FormData>(initialState);
   const [loading, setLoading] = useState(false);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
+  function handleChange(
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
   function handleDaysChange(day: string) {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       trainingDays: prev.trainingDays.includes(day)
         ? prev.trainingDays.filter((d: string) => d !== day)
@@ -39,14 +41,22 @@ export default function SetupPage() {
 
   function isValidStep() {
     switch (step) {
-      case 0: return !!formData.gender;
-      case 1: return !!formData.age && +formData.age > 10;
-      case 2: return !!formData.height && +formData.height > 0;
-      case 3: return !!formData.weight && +formData.weight > 0;
-      case 4: return !!formData.goal;
-      case 5: return !!formData.experience;
-      case 6: return formData.trainingDays.length > 0;
-      default: return true;
+      case 0:
+        return !!formData.gender;
+      case 1:
+        return !!formData.age && +formData.age > 10;
+      case 2:
+        return !!formData.height && +formData.height > 0;
+      case 3:
+        return !!formData.weight && +formData.weight > 0;
+      case 4:
+        return !!formData.goal;
+      case 5:
+        return !!formData.experience;
+      case 6:
+        return formData.trainingDays.length > 0;
+      default:
+        return true;
     }
   }
 

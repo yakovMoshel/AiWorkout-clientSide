@@ -1,5 +1,7 @@
-import { RegisterForm, RegisterFormErrors } from "../domain/models/interfaces/IRegisterForm";
-
+import {
+  RegisterForm,
+  RegisterFormErrors,
+} from "../domain/models/interfaces/IRegisterForm";
 
 export function validateRegisterForm(form: RegisterForm): RegisterFormErrors {
   const errors: RegisterFormErrors = {};
@@ -14,7 +16,8 @@ export function validateRegisterForm(form: RegisterForm): RegisterFormErrors {
   if (!form.name) errors.name = "Name is required.";
   if (!form.email) errors.email = "Email is required.";
   if (!form.password) errors.password = "Password is required.";
-  if (!form.confirmPassword) errors.confirmPassword = "Confirm Password is required.";
+  if (!form.confirmPassword)
+    errors.confirmPassword = "Confirm Password is required.";
 
   if (
     form.password &&

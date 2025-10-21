@@ -13,8 +13,7 @@ export function useWorkoutPlan() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-    const { isAuthenticated } = useAuth();
-
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     if (!isAuthenticated) {

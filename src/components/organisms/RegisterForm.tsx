@@ -4,10 +4,13 @@ import Button from "../atoms/Button";
 import { useRegisterForm } from "../../hooks/useRegisterForm";
 import { RegisterFormProps } from "../../domain/models/interfaces/IRegisterFormProps";
 
-
-
-export default function RegisterForm({ loading, onSubmit, error }: RegisterFormProps) {
-  const { form, errors, handleChange, handleSubmit } = useRegisterForm(onSubmit);
+export default function RegisterForm({
+  loading,
+  onSubmit,
+  error,
+}: RegisterFormProps) {
+  const { form, errors, handleChange, handleSubmit } =
+    useRegisterForm(onSubmit);
 
   return (
     <form onSubmit={handleSubmit} className={styles.form} autoComplete="on">
@@ -48,7 +51,9 @@ export default function RegisterForm({ loading, onSubmit, error }: RegisterFormP
         autoComplete="new-password"
       />
 
-      {errors.confirmPassword && <p className={styles.error}>{errors.confirmPassword}</p>}
+      {errors.confirmPassword && (
+        <p className={styles.error}>{errors.confirmPassword}</p>
+      )}
       <InputField
         type="password"
         name="confirmPassword"

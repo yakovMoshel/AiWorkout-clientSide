@@ -12,14 +12,14 @@ interface WorkoutFormData {
 }
 
 export async function generateWorkoutPlan(formData: WorkoutFormData) {
-  const url = 'https://ai-workout-planner.p.rapidapi.com/ai-workout';
+  const url = "https://ai-workout-planner.p.rapidapi.com/ai-workout";
 
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'content-type': 'application/json',
-      'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPIDAPI_KEY || '', // שמור במשתנה סביבה לצורכי אבטחה זמניים
-      'X-RapidAPI-Host': 'ai-workout-planner.p.rapidapi.com',
+      "content-type": "application/json",
+      "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY || "", // שמור במשתנה סביבה לצורכי אבטחה זמניים
+      "X-RapidAPI-Host": "ai-workout-planner.p.rapidapi.com",
     },
     body: JSON.stringify({
       gender: formData.gender,

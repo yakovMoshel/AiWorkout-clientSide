@@ -1,1 +1,2 @@
-export interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+export interface InputFieldProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}

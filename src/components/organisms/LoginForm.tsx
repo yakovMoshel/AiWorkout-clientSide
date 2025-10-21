@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 import { useLoginForm } from "../../hooks/useLoginForm";
 import { LoginFormProps } from "../../domain/models/interfaces/ILoginFormProps";
 
-
-
 export default function LoginForm({ error, onSubmit }: LoginFormProps) {
   const { pending } = useFormStatus();
   const { form, handleChange, handleSubmit } = useLoginForm(onSubmit);

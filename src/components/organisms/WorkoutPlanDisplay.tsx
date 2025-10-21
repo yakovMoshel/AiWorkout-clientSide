@@ -2,14 +2,16 @@ import { useState } from "react";
 import styles from "../../styles/WorkoutPlanDisplay.module.css";
 import { WorkoutPlanDisplayProps } from "../../domain/models/interfaces/IWorkoutPlanDisplayProps";
 
-
-
 // קומפוננטה זו אחראית להציג את תוצאות תוכנית האימונים שחזרה מה-API
 export default function WorkoutPlanDisplay({ plan }: WorkoutPlanDisplayProps) {
   const [currentDay, setCurrentDay] = useState(0);
 
   if (!plan || !Array.isArray(plan.workouts) || plan.workouts.length === 0) {
-    return <div className={styles.container}><p>No workout data found.</p></div>;
+    return (
+      <div className={styles.container}>
+        <p>No workout data found.</p>
+      </div>
+    );
   }
 
   const totalDays = plan.workouts.length;
@@ -26,20 +28,28 @@ export default function WorkoutPlanDisplay({ plan }: WorkoutPlanDisplayProps) {
 
   return (
     <div className={styles.container}>
-      {plan.description && <p className={styles.description}>{plan.description}</p>}
+      {plan.description && (
+        <p className={styles.description}>{plan.description}</p>
+      )}
 
       <div className={styles.grid}>
         <div className={styles.card}>
           <div className={styles.navigationHeader}>
-            <button onClick={goPrev} aria-label="Previous Day" >&lt;</button>
+            <button onClick={goPrev} aria-label="Previous Day">
+              &lt;
+            </button>
             <h3 className={`${styles.dayTitle} ${styles.active}`}>
               Day {currentDay + 1}
             </h3>
-            <button onClick={goNext} aria-label="Next Day">&gt;</button>
+            <button onClick={goNext} aria-label="Next Day">
+              &gt;
+            </button>
           </div>
           <ul className={styles.exerciseList}>
             {dayPlan.exercises.map((exercise: string, exIdx: number) => (
-              <li key={exIdx} className={styles.exerciseItem}>{exercise}</li>
+              <li key={exIdx} className={styles.exerciseItem}>
+                {exercise}
+              </li>
             ))}
           </ul>
         </div>

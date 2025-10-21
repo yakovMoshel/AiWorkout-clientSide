@@ -8,8 +8,6 @@ import StepButton from "../atoms/StepButton";
 import styles from "../../styles/SetupPage.module.css";
 import { SetupFormProps } from "../../domain/models/interfaces/ISetupFormProps";
 
-
-
 const questions = [
   {
     label: "Gender",
@@ -95,7 +93,10 @@ const questions = [
   {
     label: "Training Days",
     input: (formData: any, onChange: any, onDaysChange: any) => (
-      <TrainingDaysSelector selectedDays={formData.trainingDays} onToggle={onDaysChange} />
+      <TrainingDaysSelector
+        selectedDays={formData.trainingDays}
+        onToggle={onDaysChange}
+      />
     ),
   },
   {
@@ -134,16 +135,29 @@ export default function SetupForm({
       />
       <div style={{ marginTop: 20 }}>
         {step > 0 && (
-          <StepButton type="button" onClick={onBack} className={styles.submitButton} style={{ marginRight: 10 }}>
+          <StepButton
+            type="button"
+            onClick={onBack}
+            className={styles.submitButton}
+            style={{ marginRight: 10 }}
+          >
             הקודם
           </StepButton>
         )}
         {step < questions.length - 1 ? (
-          <StepButton type="button" onClick={onNext} className={styles.submitButton}>
+          <StepButton
+            type="button"
+            onClick={onNext}
+            className={styles.submitButton}
+          >
             הבא
           </StepButton>
         ) : (
-          <StepButton type="submit" className={styles.submitButton} disabled={pending}>
+          <StepButton
+            type="submit"
+            className={styles.submitButton}
+            disabled={pending}
+          >
             {pending ? "Saving..." : "Save & Continue"}
           </StepButton>
         )}

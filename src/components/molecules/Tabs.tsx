@@ -1,11 +1,17 @@
 import { TabsProps } from "../../domain/models/interfaces/ITabsProps";
 import Button from "../atoms/Button";
 
-
-export default function Tabs({ tabs, activeTab, onTabClick, className, tabClassName, activeTabClassName }: TabsProps) {
+export default function Tabs({
+  tabs,
+  activeTab,
+  onTabClick,
+  className,
+  tabClassName,
+  activeTabClassName,
+}: TabsProps) {
   return (
     <div className={className}>
-      {tabs.map(tab => (
+      {tabs.map((tab) => (
         <Button
           key={tab}
           type="button"

@@ -1,1 +1,2 @@
-export interface StepButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface StepButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}

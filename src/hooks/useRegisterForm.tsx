@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {   validateRegisterForm } from "../utils/validateForm";
+import { validateRegisterForm } from "../utils/validateForm";
 import { RegisterFormErrors } from "../domain/models/interfaces/IRegisterForm";
 
 export function useRegisterForm(onSubmit: (form: any) => Promise<void> | void) {

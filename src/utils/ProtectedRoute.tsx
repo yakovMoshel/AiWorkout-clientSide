@@ -1,6 +1,6 @@
-import { Navigate, useLocation } from 'react-router-dom';
-import { JSX } from 'react';
-import { useAuth } from '../store/auth-context';
+import { Navigate, useLocation } from "react-router-dom";
+import { JSX } from "react";
+import { useAuth } from "../store/auth-context";
 
 type Props = {
   children: JSX.Element;

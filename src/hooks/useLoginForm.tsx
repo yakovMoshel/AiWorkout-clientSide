@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-export function useLoginForm(onSubmit: (form: { email: string; password: string }) => Promise<void> | void) {
+export function useLoginForm(
+  onSubmit: (form: { email: string; password: string }) => Promise<void> | void,
+) {
   const [form, setForm] = useState({ email: "", password: "" });
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

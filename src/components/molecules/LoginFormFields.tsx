@@ -2,9 +2,11 @@ import InputField from "../atoms/InputField";
 import styles from "../../styles/LoginPage.module.css";
 import { LoginFormFieldsProps } from "../../domain/models/interfaces/ILoginFormFieldsProps";
 
-
-
-export default function LoginFormFields({ onChange, error, form }: LoginFormFieldsProps) {
+export default function LoginFormFields({
+  onChange,
+  error,
+  form,
+}: LoginFormFieldsProps) {
   return (
     <>
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -17,7 +19,6 @@ export default function LoginFormFields({ onChange, error, form }: LoginFormFiel
         className={styles.input}
         value={form.email}
         onChange={onChange}
-        
       />
       <InputField
         type="password"

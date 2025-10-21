@@ -9,7 +9,7 @@ export default function WeekTracker() {
     <section className={styles.card}>
       <h2 className={styles.sectionTitle}>Weekly Progress</h2>
       <div className={styles.weekTracker}>
-        {days.map(day => (
+        {days.map((day) => (
           <DayBox key={day} day={day} completed />
         ))}
       </div>

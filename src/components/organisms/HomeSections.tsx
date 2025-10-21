@@ -10,7 +10,7 @@ export default function HomeSections() {
   const today = new Date().toLocaleString("en-US", { weekday: "long" });
   // const today =  'Thursday'
   const todayWorkout = workouts.find(
-    (w) => w.day.toLowerCase() === today.toLowerCase()
+    (w) => w.day.toLowerCase() === today.toLowerCase(),
   );
 
   const mappedPlan = mapPlanForDisplay(workouts);
@@ -22,7 +22,9 @@ export default function HomeSections() {
     <>
       <WorkoutCard
         exercises={todayWorkout?.exercises.map((e) => e.name) || []}
-        dayNumber={todayWorkout ? workouts.indexOf(todayWorkout) + 1 : undefined}
+        dayNumber={
+          todayWorkout ? workouts.indexOf(todayWorkout) + 1 : undefined
+        }
       />
       <WorkoutPlanDisplay plan={mappedPlan} />
       <WeekTracker />

@@ -1,1 +1,2 @@
-export interface TextAreaFieldProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+export interface TextAreaFieldProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
