@@ -44,7 +44,7 @@ export async function logout() {
 export async function fetchUser() {
   try {
     const response = await api.get('/auth/user', { withCredentials: true });
-    return response.data; // { id, name, email }
+    return response.data; 
   } catch (err) {
     return null;
   }

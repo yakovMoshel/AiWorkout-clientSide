@@ -1,24 +1,15 @@
 import React from 'react';
 import ProfileInfo from '../molecules/ProfileInfo';
+import { User } from '../../domain/models/interfaces/IUser';
 
-interface ProfileCardProps {
-    user: {
-        name: string;
-        age: number;
-        weight: number;
-        goal: string;
-        avatarSrc?: string;
-    };
-}
-
-const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => (
+const ProfileCard: React.FC<{ user: User }> = ({ user }) => (
     <>
         <ProfileInfo
             name={user.name}
             age={user.age}
             weight={user.weight}
             goal={user.goal}
-            avatarSrc={user.avatarSrc}
+            image={user.image}
         />
 
     </>

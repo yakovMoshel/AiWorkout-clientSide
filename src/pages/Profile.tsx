@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Profile() {
     const navigate = useNavigate();
     const { user } = useAuth();
+    console.log(user?.image)
     if (!user) {
         return <div className={styles.container}>משתמש לא נמצא</div>;
     }

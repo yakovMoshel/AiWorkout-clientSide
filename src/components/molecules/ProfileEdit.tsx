@@ -1,49 +1,76 @@
-import React, { useState } from 'react';
-import InputField from '../atoms/InputField';
-import SelectField from '../atoms/SelectField';
-import Avatar from '../atoms/Avatar';
-import styles from '../../styles/ProfileEdit.module.css';
-
-interface ProfileEditProps {
-    initialWeight: number;
-    initialGoal: string;
-    avatarSrc?: string;
-}
+import React, { useState } from "react";
+import Avatar from "../atoms/Avatar";
+import InputField from "../atoms/InputField";
+import SelectField from "../atoms/SelectField";
+import styles from "../../styles/ProfileEdit.module.css";
+import { editProfile } from "../../services/pofileEdit";
 
 const goals = [
-    { value: 'muscle_gain', label: 'Muscle Gain' },
-    { value: 'fat_loss', label: 'Fat Loss' },
-    { value: 'endurance', label: 'Endurance' },
+    { value: "muscle_gain", label: "Muscle Gain" },
+    { value: "fat_loss", label: "Fat Loss" },
+    { value: "endurance", label: "Endurance" },
 ];
 
-const ProfileEdit: React.FC<ProfileEditProps> = ({ initialWeight, initialGoal, avatarSrc }) => {
+type ProfileEditProps = {
+    image?: string;
+    initialWeight: number;
+    initialGoal: string;
+};
+
+const ProfileEdit: React.FC<ProfileEditProps> = ({ image, initialWeight, initialGoal }) => {
+    const [preview, setPreview] = useState<string | undefined>(image);
+    const [message, setMessage] = useState<string | null>(null);
     const [weight, setWeight] = useState(initialWeight);
     const [goal, setGoal] = useState(initialGoal);
-    const [avatar, setAvatar] = useState<string | undefined>(avatarSrc);
+    const [file, setFile] = useState<File | null>(null)
 
     const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const reader = new FileReader();
-            reader.onload = (ev) => setAvatar(ev.target?.result as string);
-            reader.readAsDataURL(e.target.files[0]);
+        const selectedFile = e.target.files?.[0];
+        if (!selectedFile) return;
+
+        setFile(selectedFile); 
+
+        const reader = new FileReader();
+        reader.onload = (ev) => setPreview(ev.target?.result as string);
+        reader.readAsDataURL(selectedFile);
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        if (file) formData.append("image", file); 
+        formData.append("weight", weight.toString());
+        formData.append("goal", goal);
+
+        try {
+            await editProfile(formData);
+            setMessage("Profile updated successfully!");
+        } catch (err: any) {
+            setMessage(err.message);
         }
     };
 
     return (
-        <div className={styles.edit}>
+        <form className={styles.edit} onSubmit={handleSubmit}>
             <label>
-                <Avatar src={avatar} />
-                <input type="file" accept="image/*" onChange={handleAvatarChange} className={styles.avatarInput} />
+                <Avatar image={preview} />
+                <input type="file" name="image" accept="image/*" onChange={handleAvatarChange} />
             </label>
+
             <label>
                 Weight
                 <InputField type="number" value={weight} onChange={e => setWeight(Number(e.target.value))} />
             </label>
+
             <label>
                 Goal
                 <SelectField options={goals} value={goal} onChange={e => setGoal(e.target.value)} />
             </label>
-        </div>
+
+            <button type="submit">Save</button>
+            {message && <p>{message}</p>}
+        </form>
     );
 };
 
