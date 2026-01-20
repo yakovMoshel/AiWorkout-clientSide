@@ -13,8 +13,8 @@ const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   loading: true,
   error: null,
-  refetchUser: async () => {},
-  logout: () => {},
+  refetchUser: async () => { },
+  logout: () => { },
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setError(null);
     try {
       const data = await getCurrentUser();
-      console.log("USER IMAGE:", data.user.image);
       setUser(data.user);
     } catch (err) {
       setUser(null);

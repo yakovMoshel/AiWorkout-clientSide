@@ -2,9 +2,10 @@ import api from "../utils/api";
 
 export async function loginAction(
   prevState: any,
-  formData: { email: string; password: string },
+  formData: { email: string; password: string; },
 ) {
-  const { email, password } = formData;
+  
+  const { email, password , } = formData;
   if (!email || !password) {
     return { error: "Please fill in all fields" };
   }
@@ -16,27 +17,33 @@ export async function loginAction(
     );
     return { error: "" };
   } catch (err: any) {
+    console.log(process.env.NEXT_PUBLIC_API_URL);
     return { error: err?.response?.data?.message || "Login failed" };
   }
 }
 
 export async function registerAction(
   prevState: any,
-  formData: { name: string; email: string; password: string },
+  formData: { name: string; email: string; password: string ; confirmPassword: string; },
 ) {
-  const { name, email, password } = formData;
+  const { name, email, password ,confirmPassword  } = formData;
 
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !confirmPassword) {
     return { error: "Please fill in all fields" };
   }
   try {
     await api.post(
       "/auth/register",
-      { name, email, password },
+      { name, email, password ,confirmPassword  },
       { withCredentials: true },
     );
+    
+    console.log(process.env.NEXT_PUBLIC_API_URL);
+    console.log('Register reached, sending cookie');
+
     return { error: "" };
   } catch (err: any) {
+    console.log(process.env.NEXT_PUBLIC_API_URL);
     return { error: err?.response?.data?.message || "Registration failed" };
   }
 }
