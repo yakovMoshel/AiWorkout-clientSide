@@ -17,7 +17,6 @@ export async function loginAction(
     );
     return { error: "" };
   } catch (err: any) {
-    console.log(process.env.NEXT_PUBLIC_API_URL);
     return { error: err?.response?.data?.message || "Login failed" };
   }
 }
@@ -38,12 +37,9 @@ export async function registerAction(
       { withCredentials: true },
     );
     
-    console.log(process.env.NEXT_PUBLIC_API_URL);
-    console.log('Register reached, sending cookie');
 
     return { error: "" };
   } catch (err: any) {
-    console.log(process.env.NEXT_PUBLIC_API_URL);
     return { error: err?.response?.data?.message || "Registration failed" };
   }
 }
