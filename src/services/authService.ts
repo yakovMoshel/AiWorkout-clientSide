@@ -43,7 +43,7 @@ export async function registerAction(
     return { error: err?.response?.data?.message || "Registration failed" };
   }
 }
-.
+
 
 export async function logout() {
   try {
