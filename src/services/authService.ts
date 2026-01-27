@@ -26,7 +26,7 @@ export async function registerAction(
   formData: { name: string; email: string; password: string ; confirmPassword: string; },
 ) {
   const { name, email, password ,confirmPassword  } = formData;
-
+  console.log("📤 Sending data:", { name, email, password, confirmPassword }); 
   if (!name || !email || !password || !confirmPassword) {
     return { error: "Please fill in all fields" };
   }
