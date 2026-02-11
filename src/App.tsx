@@ -10,6 +10,7 @@ import { logout } from "./utils/auth";
 import { AuthProvider } from "./store/auth-context";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import CalendarSetupPage from "./pages/CalendarSetupPage";
 // import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <ExploreExercisesPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/calendar-setup",
+        element: (
+          <ProtectedRoute>
+            <CalendarSetupPage />
           </ProtectedRoute>
         ),
       },
