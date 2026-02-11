@@ -10,7 +10,6 @@ export default function MainNavigations() {
     ...(isAuthenticated
       ? [
           { to: "/explore-exercises", label: "Explore Exercises" },
-          // { to: "/setup", label: "Set Up" },
           // { to: "/AiCoach", label: "AI Coach" },
           { to: "/profile", label: "Profile" },
         ]
