@@ -5,13 +5,15 @@ import CalendarReminderDialog from "src/components/organisms/CalendarReminderDia
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowPopup(true), 2500);
-    return () => clearTimeout(timer);
-  }, []);
+    if (!loading && user) {
+      const timer = setTimeout(() => setShowPopup(true), 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [user, loading]);
 
   return (
     <div className={styles.container}>
@@ -21,10 +23,13 @@ export default function Home() {
 
       <HomeSections />
 
-      <CalendarReminderDialog
-        open={showPopup}
-        onClose={() => setShowPopup(false)}
-      />
+      {user && (
+        <CalendarReminderDialog
+          open={showPopup}
+          onClose={() => setShowPopup(false)}
+        />
+      )}
     </div>
   );
 }
+
