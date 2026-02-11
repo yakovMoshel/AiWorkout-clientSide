@@ -8,7 +8,6 @@ export default function HomeSections() {
   const { workouts, loading, error } = useWorkoutPlan();
 
   const today = new Date().toLocaleString("en-US", { weekday: "long" });
-  // const today =  'Thursday'
   const todayWorkout = workouts.find(
     (w) => w.day.toLowerCase() === today.toLowerCase(),
   );
