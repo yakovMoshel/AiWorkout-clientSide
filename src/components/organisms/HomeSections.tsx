@@ -1,4 +1,3 @@
-import WeekTracker from "../molecules/WeekTracker";
 import WorkoutCard from "../molecules/WorkoutCard";
 import WorkoutPlanDisplay from "../organisms/WorkoutPlanDisplay";
 import { useWorkoutPlan } from "../../hooks/useWorkoutPlan";
@@ -26,7 +25,6 @@ export default function HomeSections() {
         }
       />
       <WorkoutPlanDisplay plan={mappedPlan} />
-      <WeekTracker />
     </>
   );
 }
