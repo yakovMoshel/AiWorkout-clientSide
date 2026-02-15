@@ -10,8 +10,16 @@ export default function Home() {
 
   useEffect(() => {
     if (!loading && user) {
-      const timer = setTimeout(() => setShowPopup(true), 2500);
-      return () => clearTimeout(timer);
+      const popupShownKey = `calendar_popup_shown_${user.id}`;
+      const hasShownPopup = localStorage.getItem(popupShownKey);
+
+      if (!hasShownPopup) {
+        const timer = setTimeout(() => {
+          setShowPopup(true);
+          localStorage.setItem(popupShownKey, "true");
+        }, 2500);
+        return () => clearTimeout(timer);
+      }
     }
   }, [user, loading]);
 

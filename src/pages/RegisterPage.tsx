@@ -19,7 +19,9 @@ export default function RegisterPage() {
       if (error) throw new Error(error);
 
       await refetchUser();
-      navigate("/setup");
+      setTimeout(() => {
+        navigate("/setup");
+      }, 100);
     } catch (err: any) {
       const message =
         err?.response?.data?.message ||
