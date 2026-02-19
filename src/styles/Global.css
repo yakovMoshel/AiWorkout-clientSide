@@ -1,0 +1,26 @@
+/* ===== להכניס ל-index.css / global.css שלך ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #0d0d0f;
+  --surface: #16161a;
+  --surface2: #1e1e24;
+  --border: #2a2a32;
+  --accent: #c8f564;
+  --accent-dim: rgba(200, 245, 100, 0.12);
+  --accent-glow: rgba(200, 245, 100, 0.25);
+  --text: #e8e8f0;
+  --text-muted: #6b6b80;
+  --user-bubble: #1f2937;
+  --danger: #ff6b6b;
+  --warn: #ffd166;
+  --font: 'Sora', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,39 @@
+.bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 10px 10px 10px 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bar:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14.5px;
+  line-height: 1.6;
+  resize: none;
+  max-height: 160px;
+  overflow-y: auto;
+  direction: rtl;
+  text-align: right;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input::-webkit-scrollbar {
+  width: 3px;
+}

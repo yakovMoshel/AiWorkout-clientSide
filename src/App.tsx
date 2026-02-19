@@ -11,6 +11,7 @@ import { AuthProvider } from "./store/auth-context";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import CalendarSetupPage from "./pages/CalendarSetupPage";
+import { AiChatPage } from "./pages/AiChat";
 // import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
@@ -76,6 +77,14 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/ai-chat",
+        element: (
+          <ProtectedRoute>
+            <AiChatPage/>
+          </ProtectedRoute>
+        ),
+      }
     ],
   },
 ]);

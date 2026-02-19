@@ -6,4 +6,6 @@ export interface User {
   weight: number;
   goal: string;
   image?: string;
+  aiUsage: number;
+
 }
