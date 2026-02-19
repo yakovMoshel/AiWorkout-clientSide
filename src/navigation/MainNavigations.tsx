@@ -1,9 +1,23 @@
 import { NavLink } from "react-router-dom";
 import styles from "../styles/MainNavigation.module.css";
 import { useAuth } from "../store/auth-context";
+import { useEffect, useRef, useState } from "react";
 
 export default function MainNavigations() {
   const { isAuthenticated, logout } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
 
   const navLinks = [
     { to: "/", label: "HOME" },
@@ -20,8 +34,20 @@ export default function MainNavigations() {
   ];
 
   return (
-    <nav className={styles.nav}>
-      <ul className={styles.list}>
+    <nav className={styles.nav} ref={navRef}>
+      <button
+        className={styles.menuButton}
+        aria-expanded={menuOpen}
+        aria-controls="main-nav-list"
+        onClick={() => setMenuOpen((prev) => !prev)}
+      >
+        <span className={styles.menuIcon} />
+        <span className={styles.menuLabel}>Menu</span>
+      </button>
+      <ul
+        id="main-nav-list"
+        className={`${styles.list} ${menuOpen ? styles.listOpen : ""}`}
+      >
         {navLinks.map(({ to, label }) => (
           <li key={to}>
             <NavLink
@@ -29,6 +55,7 @@ export default function MainNavigations() {
               className={({ isActive }) =>
                 isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
               }
+              onClick={() => setMenuOpen(false)}
             >
               {label}
             </NavLink>
@@ -37,7 +64,13 @@ export default function MainNavigations() {
 
         {isAuthenticated && (
           <li>
-            <button onClick={logout} className={styles.navLink}>
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                logout();
+              }}
+              className={styles.navLink}
+            >
               Logout
             </button>
           </li>

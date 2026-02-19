@@ -3,24 +3,235 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg: #0d0d0f;
-  --surface: #16161a;
-  --surface2: #1e1e24;
-  --border: #2a2a32;
-  --accent: #c8f564;
-  --accent-dim: rgba(200, 245, 100, 0.12);
-  --accent-glow: rgba(200, 245, 100, 0.25);
-  --text: #e8e8f0;
-  --text-muted: #6b6b80;
-  --user-bubble: #1f2937;
-  --danger: #ff6b6b;
-  --warn: #ffd166;
+  --brand-blue: #0052A4;
+  --brand-blue-dark: #00408a;
+  --brand-blue-dim: rgba(0, 82, 164, 0.12);
+  --brand-blue-glow: rgba(0, 82, 164, 0.22);
+  --brand-green: #4CAF50;
+  --brand-dark: #1C2B39;
+  --bg-light: #F4F7F9;
+  --bg: #F4F7F9;
+  --surface: #FFFFFF;
+  --surface2: #EEF2F5;
+  --border: #D9E1E7;
+  --accent: var(--brand-green);
+  --accent-dim: rgba(76, 175, 80, 0.12);
+  --accent-glow: rgba(76, 175, 80, 0.25);
+  --text: var(--brand-dark);
+  --text-muted: #5C6B76;
+  --user-bubble: #E7F0FA;
+  --danger: #e55353;
+  --warn: #f7b955;
   --font: 'Sora', sans-serif;
   --mono: 'DM Mono', monospace;
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.08);
+  --transition: 160ms ease;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+body {
+  background: linear-gradient(180deg, #f7fafc 0%, var(--bg) 30%, var(--bg) 100%);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.6rem;
+}
+
+p {
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+main {
+  padding: 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 12px;
+  }
+}
+
+a {
+  color: var(--brand-blue);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--brand-blue-dark);
+}
+
+img, svg, video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--brand-blue), #1b63c7);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  filter: brightness(1.02);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+input, textarea, select {
+  width: 100%;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 3px var(--brand-blue-dim);
+  background: var(--surface2);
+}
+
+textarea {
+  resize: vertical;
+}
+
+::selection {
+  background: var(--brand-green);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2f2f38;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a45;
+}
+
+.calendar-dialog {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.calendar-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.dialog-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+  max-width: 460px;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+.confirm-btn {
+  background: var(--brand-blue);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+}
+
+.cancel-btn {
+  background: var(--surface2);
+  color: var(--text);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+}
+
+@media (max-width: 480px) {
+  .dialog-content {
+    width: calc(100vw - 32px);
+    padding: 16px;
+  }
+
+  .dialog-actions {
+    flex-direction: column;
+  }
 }

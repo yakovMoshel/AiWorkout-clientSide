@@ -1,10 +1,10 @@
 .btn {
   width: 40px;
   height: 40px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   border: none;
-  background: var(--accent);
-  color: #0d0d0f;
+  background: var(--brand-blue);
+  color: #ffffff;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@
 
 .btn:hover:not(.disabled) {
   transform: scale(1.06);
-  box-shadow: 0 0 14px var(--accent-glow);
+  box-shadow: 0 0 14px var(--brand-blue-glow);
 }
 
 .btn:active:not(.disabled) {

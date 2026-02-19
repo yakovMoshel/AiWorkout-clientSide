@@ -1,12 +1,12 @@
 /* src/styles/ExerciseCard.module.css */
 
 .card {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -14,6 +14,8 @@
 
 .card:hover {
   transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(0, 82, 164, 0.3);
 }
 
 .image {
@@ -30,11 +32,12 @@
   font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  color: var(--text);
 }
 
 .info {
   font-size: 0.9rem;
-  color: #555;
+  color: var(--text-muted);
   margin-bottom: 0.25rem;
 }
 
@@ -42,20 +45,40 @@
   margin-top: 0.5rem;
   padding: 0.4rem 0.75rem;
   font-size: 0.9rem;
-  border: 1px solid #0070f3;
-  background-color: white;
-  color: #0070f3;
-  border-radius: 6px;
+  border: 1px solid var(--brand-blue);
+  background-color: var(--surface);
+  color: var(--brand-blue);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .favoriteButton:hover {
-  background-color: #0070f3;
-  color: white;
+  background-color: var(--brand-blue);
+  color: #ffffff;
 }
 .favoriteButton:disabled {
-  background-color: #e0e0e0;
-  color: #999;
+  background-color: var(--border);
+  color: var(--text-muted);
   cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .image {
+    height: 160px;
+  }
+
+  .details {
+    padding: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .image {
+    height: 140px;
+  }
+
+  .name {
+    font-size: 1rem;
+  }
 }

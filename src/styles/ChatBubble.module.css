@@ -17,13 +17,13 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--accent-dim);
-  border: 1px solid var(--accent);
+  background: var(--brand-blue-dim);
+  border: 1px solid var(--brand-blue);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  color: var(--accent);
+  color: var(--brand-blue);
   flex-shrink: 0;
   order: -1;
 }
@@ -31,15 +31,15 @@
 .bubble {
   max-width: 72%;
   padding: 14px 18px;
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   font-size: 14.5px;
   line-height: 1.75;
   word-break: break-word;
 }
 
 .userBubble {
-  background: var(--user-bubble);
-  border: 1px solid var(--border);
+  background: var(--brand-blue-dim);
+  border: 1px solid rgba(0, 82, 164, 0.2);
   border-bottom-right-radius: 6px;
   color: var(--text);
 }
@@ -60,5 +60,11 @@
   .bubble {
     max-width: 88%;
     font-size: 14px;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
 }

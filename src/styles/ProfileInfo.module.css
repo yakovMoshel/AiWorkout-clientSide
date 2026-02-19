@@ -1,8 +1,21 @@
 .info {
   font-size: 1.1rem;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  color: var(--text-muted);
 }
 .name {
   font-size: 2rem;
   font-weight: bold;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+@media (max-width: 768px) {
+  .name {
+    font-size: 1.6rem;
+  }
+
+  .info {
+    font-size: 1rem;
+  }
 }

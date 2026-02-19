@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWorkoutPlan } from "src/hooks/useWorkoutPlan";
 import api from "src/utils/api";
+import styles from "../styles/CalendarSetupPage.module.css";
 
 export default function CalendarSetupPage() {
   const { workouts } = useWorkoutPlan();
@@ -49,21 +50,28 @@ export default function CalendarSetupPage() {
   }
 
   return (
-    <div>
-      <h2>Choose a time for each workout day</h2>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Choose a time for each workout day</h2>
 
-      {workouts.map(w => (
-        <div key={w.day}>
-          <label>{w.day}</label>
-          <input
-            type="time"
-            value={times[dayMap[w.day]] || ""}
-            onChange={(e) => handleChange(w.day, e.target.value)}
-          />
-        </div>
-      ))}
+      <div className={styles.list}>
+        {workouts.map(w => (
+          <div key={w.day} className={styles.row}>
+            <label className={styles.label}>{w.day}</label>
+            <input
+              className={styles.timeInput}
+              type="time"
+              value={times[dayMap[w.day]] || ""}
+              onChange={(e) => handleChange(w.day, e.target.value)}
+            />
+          </div>
+        ))}
+      </div>
 
-      <button onClick={handleSubmit} disabled={loading}>
+      <button
+        className={styles.submitButton}
+        onClick={handleSubmit}
+        disabled={loading}
+      >
         Save and schedule in calendar
       </button>
     </div>

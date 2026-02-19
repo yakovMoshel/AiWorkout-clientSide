@@ -3,7 +3,25 @@
   flex-direction: column;
   gap: 16px;
   margin-top: 20px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
 }
 .avatarInput {
   margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .edit {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .edit {
+    padding: 12px;
+  }
 }

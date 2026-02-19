@@ -23,18 +23,18 @@
 }
 
 .free.ok {
-  background: var(--accent);
+  background: var(--brand-green);
   box-shadow: 0 0 6px var(--accent-glow);
 }
 
 .free.warn {
   background: var(--warn);
-  box-shadow: 0 0 6px rgba(255, 209, 102, 0.4);
+  box-shadow: 0 0 6px rgba(247, 185, 85, 0.4);
 }
 
 .free.danger {
   background: var(--danger);
-  box-shadow: 0 0 6px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 0 6px rgba(229, 83, 83, 0.4);
 }
 
 .label {

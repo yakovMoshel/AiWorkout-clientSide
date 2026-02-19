@@ -1,4 +1,5 @@
 .inputField {
-  margin: 10px 0;
-  padding: 4px;
+  margin: 12px 0;
+  padding: 8px ;
+  color: var(--text);
 }

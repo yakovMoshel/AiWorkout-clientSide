@@ -9,7 +9,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--brand-green);
   opacity: 0.4;
   animation: blink 1.2s ease-in-out infinite;
 }

@@ -3,6 +3,7 @@
 .container {
   max-width: 900px;
   margin: auto;
+  padding: 32px 24px 48px;
 }
 
 .header {
@@ -10,20 +11,22 @@
   font-weight: bold;
   margin-bottom: 2rem;
   text-align: center;
+  color: var(--text);
+  letter-spacing: 0.01em;
 }
 
 .card {
-  background-color: #f9f9f9;
-  border-radius: 16px;
+  background-color: var(--surface);
+  border-radius: var(--radius-md);
   padding: 1.5rem;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .sectionTitle {
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: var(--text);
 }
 
 .links {
@@ -35,18 +38,20 @@
 }
 
 .navButton {
-  background-color: #4caf50;
-  color: white;
+  background-color: var(--brand-blue);
+  color: #ffffff;
   padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: var(--shadow-sm);
 }
 
 .navButton:hover {
-  background-color: #388e3c;
+  background-color: var(--brand-blue-dark);
+  box-shadow: var(--shadow-md);
 }
 
 .weekTracker {
@@ -56,18 +61,47 @@
   margin-top: 1rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 16px 32px;
+  }
+
+  .header {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .weekTracker {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 12px 28px;
+  }
+
+  .header {
+    font-size: 1.4rem;
+  }
+
+  .weekTracker {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .dayBox {
-  background-color: #fff;
+  background-color: var(--surface);
   padding: 0.6rem;
   text-align: center;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
   font-size: 0.875rem;
 }
 
 .completed {
   display: block;
-  color: #4caf50;
+  color: var(--brand-green);
   font-weight: bold;
   font-size: 1.1rem;
 }
