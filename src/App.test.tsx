@@ -2,8 +2,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", () => {
+test("renders the header logo", () => {
   render(<App />);
-  const headerElement = screen.getByText(/Ai Workout/i);
-  expect(headerElement).toBeInTheDocument();
+  const logo = screen.getByAltText(/Ai Workout Logo/i);
+  expect(logo).toBeInTheDocument();
 });
