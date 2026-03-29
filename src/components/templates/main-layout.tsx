@@ -1,13 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "../molecules/Header";
 
+const AUTH_ROUTES = ["/login", "/register"];
+
 export default function Layout() {
-  // const navigation = useNavigation();
-  // // const isLoading = navigation.state === "loading";
+  const { pathname } = useLocation();
+  const isAuthPage = AUTH_ROUTES.includes(pathname);
 
   return (
     <>
-      <Header />
+      {!isAuthPage && <Header />}
       <main>
         <Outlet />
       </main>

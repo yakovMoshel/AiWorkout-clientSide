@@ -1,0 +1,42 @@
+.container {
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 1.5rem;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.2s;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+
+.tab:hover {
+  color: #111827;
+}
+
+.tab.active {
+  color: #111827;
+  border-bottom-color: #111827; /* שנה לצבע הראשי של האפליקציה */
+  font-weight: 600;
+}
+
+.content {
+  padding-top: 0.5rem;
+}

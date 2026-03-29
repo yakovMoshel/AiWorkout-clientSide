@@ -12,18 +12,20 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import CalendarSetupPage from "./pages/CalendarSetupPage";
 import { AiChatPage } from "./pages/AiChat";
-// import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    // errorElement: <ErrorPage />,
     id: "root",
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/setup",
@@ -81,10 +83,10 @@ const router = createBrowserRouter([
         path: "/ai-chat",
         element: (
           <ProtectedRoute>
-            <AiChatPage/>
+            <AiChatPage />
           </ProtectedRoute>
         ),
-      }
+      },
     ],
   },
 ]);
