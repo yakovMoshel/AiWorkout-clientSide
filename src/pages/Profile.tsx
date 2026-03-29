@@ -8,7 +8,7 @@ export default function Profile() {
   const { user } = useAuth();
   console.log(user?.image);
   if (!user) {
-    return <div className={styles.container}>משתמש לא נמצא</div>;
+    return <div className={styles.container}>User not found</div>;
   }
   return (
     <div className={styles.container}>

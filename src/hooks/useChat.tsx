@@ -37,9 +37,9 @@ export const useChat = ({ initialUsage }: UseChatProps) => {
 
         if (status === 403) {
           setUsedMessages(AI_LIMIT);
-          setError(message ?? "הגעת למגבלת ההודעות.");
+          setError(message ?? "You've reached the message limit.");
         } else {
-          setError(message ?? "שגיאה בלתי צפויה, נסה שוב.");
+          setError(message ?? "Unexpected error, please try again.");
         }
       } finally {
         setLoading(false);

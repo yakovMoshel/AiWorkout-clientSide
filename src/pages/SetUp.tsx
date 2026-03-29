@@ -62,7 +62,7 @@ export default function SetupPage() {
 
   function handleNext() {
     if (!isValidStep()) {
-      alert("נא למלא את השדה");
+      alert("Please fill out the field");
       return;
     }
     setStep(step + 1);

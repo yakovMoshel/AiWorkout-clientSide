@@ -7,7 +7,7 @@ export default function ExerciseCard({ exercise }: PropsExercise) {
 
   const toggleFavorite = () => {
     setIsFavorite((prev) => !prev);
-    // בעתיד אפשר להוסיף כאן קריאה לשרת לשמירת מועדפים
+    // In future, you can add a server call here to save favorites
   };
 
   return (

@@ -8,7 +8,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const { refetchUser } = useAuth();
   const [searchParams] = useSearchParams();
-  const defaultTab = searchParams.get("tab") === "register" ? "register" : "login";  // ← הוסף
+  const defaultTab = searchParams.get("tab") === "register" ? "register" : "login";  // ← add
 
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");

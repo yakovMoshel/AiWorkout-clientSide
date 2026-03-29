@@ -33,7 +33,7 @@
 
 .tab.active {
   color: #111827;
-  border-bottom-color: #111827; /* שנה לצבע הראשי של האפליקציה */
+  border-bottom-color: #111827; /* change to app primary color */
   font-weight: 600;
 }
 

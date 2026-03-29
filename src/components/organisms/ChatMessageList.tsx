@@ -18,8 +18,8 @@ export const ChatMessageList = ({ messages, loading, error }: ChatMessageListPro
       {messages.length === 0 && !loading && (
         <div className={styles.empty}>
           <div className={styles.emptyIcon}>✦</div>
-          <p className={styles.emptyTitle}>שאל אותי כל דבר</p>
-          <p className={styles.emptySub}>אני כאן לעזור לך עם אימון, תזונה ועוד</p>
+          <p className={styles.emptyTitle}>Ask me anything</p>
+          <p className={styles.emptySub}>I'm here to help with workouts, nutrition and more</p>
         </div>
       )}
 

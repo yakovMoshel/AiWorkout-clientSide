@@ -18,7 +18,7 @@ export async function generateWorkoutPlan(formData: WorkoutFormData) {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY || "", // שמור במשתנה סביבה לצורכי אבטחה זמניים
+      "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY || "", // store in environment variable for security
       "X-RapidAPI-Host": "ai-workout-planner.p.rapidapi.com",
     },
     body: JSON.stringify({
