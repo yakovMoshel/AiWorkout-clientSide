@@ -7,5 +7,5 @@ export interface User {
   goal: string;
   image?: string;
   aiUsage: number;
-
+profileComplete: boolean
 }
