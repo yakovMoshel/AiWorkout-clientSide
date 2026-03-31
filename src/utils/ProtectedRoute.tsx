@@ -16,7 +16,7 @@ export default function ProtectedRoute({ children }: Props) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  if (!user?.profileComplete && location.pathname !== "/setup") {
+  if (!(user as { profileComplete?: boolean })?.profileComplete && location.pathname !== "/setup") {
     return <Navigate to="/setup" replace />;
   }
 

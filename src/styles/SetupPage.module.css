@@ -38,6 +38,8 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--surface);
+  color: var(--brand-blue);
+
 }
 
 .dayButton:hover {
@@ -48,6 +50,13 @@
   background-color: var(--brand-blue);
   color: #ffffff;
 }
+
+.selected:hover {
+  background-color: var(--brand-blue);
+  color: #ffffff;
+  border-color: var(--brand-blue);
+}
+
 .submitButton {
   background-color: var(--brand-green);
   color: #ffffff;
@@ -58,6 +67,33 @@
 }
 .submitButton:disabled {
   opacity: 0.5;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 8px;
+}
+
+.skipButton {
+  background: transparent;
+  border: 1px solid #9ca3af;
+  color: #6b7280;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.skipButton:hover {
+  border-color: #6b7280;
+  color: #374151;
+}
+
+.stepIndicator {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {
