@@ -4,15 +4,21 @@ import Avatar from "../atoms/Avatar";
 
 interface ProfileInfoProps {
   name: string;
+  email: string;    
   age: number;
+  height: number;   
   weight: number;
   goal: string;
   image?: string;
 }
 
+
+
 const ProfileInfo: React.FC<ProfileInfoProps> = ({
   name,
+  email,
   age,
+  height,
   weight,
   goal,
   image,
@@ -20,9 +26,11 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({
   <div className={styles.info}>
     <Avatar image={image} />
     <div className={styles.name}>{name}</div>
-    <p>Age: {age}</p>
-    <p>Weight: {weight} kg</p>
-    <p>Goal: {goal}</p>
+    <p>{email}</p>
+    <p>Age: {age ?? "—"}</p>
+    <p>Height: {height ? `${height} cm` : "—"}</p>
+    <p>Weight: {weight ? `${weight} kg` : "—"}</p>
+    <p>Goal: {goal ?? "—"}</p>
   </div>
 );
 
