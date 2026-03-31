@@ -3,9 +3,10 @@ export interface User {
   email: string;
   name: string;
   age: number;
+  height: number;      
   weight: number;
   goal: string;
   image?: string;
   aiUsage: number;
-profileComplete: boolean
+  profileComplete: boolean; 
 }
