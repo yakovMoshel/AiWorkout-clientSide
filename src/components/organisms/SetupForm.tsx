@@ -116,23 +116,34 @@ export default function SetupForm({
   step,
   formData,
   pending,
+  stepError,
+  submitError,
+  isOptionalStep,
   onChange,
   onDaysChange,
   onNext,
+  onSkip,
   onBack,
   onSubmit,
 }: SetupFormProps) {
   return (
     <form onSubmit={onSubmit} className={styles.formContainer}>
       <h2 className={styles.title}>Setup Your Profile</h2>
+
+      {/* Progress indicator */}
+      <p className={styles.stepIndicator}>
+        Step {step + 1} of {questions.length}
+      </p>
+
       <StepQuestion
         label={questions[step].label}
-        input={
-          step === 6
-            ? questions[step].input(formData, onChange, onDaysChange)
-            : questions[step].input(formData, onChange, onDaysChange)
-        }
+        input={questions[step].input(formData, onChange, onDaysChange)}
       />
+
+      {stepError && <p className={styles.error}>{stepError}</p>}
+
+      {submitError && <p className={styles.error}>{submitError}</p>}
+
       <div style={{ marginTop: 20 }}>
         {step > 0 && (
           <StepButton
@@ -141,25 +152,52 @@ export default function SetupForm({
             className={styles.submitButton}
             style={{ marginRight: 10 }}
           >
-            הקודם
+            Back
           </StepButton>
         )}
+
         {step < questions.length - 1 ? (
-          <StepButton
-            type="button"
-            onClick={onNext}
-            className={styles.submitButton}
-          >
-            הבא
-          </StepButton>
+          <>
+            <StepButton
+              type="button"
+              onClick={onNext}
+              className={styles.submitButton}
+            >
+              Next
+            </StepButton>
+
+            {isOptionalStep && (
+              <StepButton
+                type="button"
+                onClick={onSkip}
+                className={styles.skipButton}
+                style={{ marginLeft: 10 }}
+              >
+                Skip
+              </StepButton>
+            )}
+          </>
         ) : (
-          <StepButton
-            type="submit"
-            className={styles.submitButton}
-            disabled={pending}
-          >
-            {pending ? "Saving..." : "Save & Continue"}
-          </StepButton>
+          <>
+            <StepButton
+              type="submit"
+              className={styles.submitButton}
+              disabled={pending}
+            >
+              {pending ? "Saving..." : "Save & Continue"}
+            </StepButton>
+
+            {isOptionalStep && !pending && (
+              <StepButton
+                type="button"
+                onClick={onSkip}
+                className={styles.skipButton}
+                style={{ marginLeft: 10 }}
+              >
+                Skip
+              </StepButton>
+            )}
+          </>
         )}
       </div>
     </form>
