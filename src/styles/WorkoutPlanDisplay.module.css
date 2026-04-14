@@ -67,14 +67,39 @@
 }
 
 .exerciseItem {
-  padding: 0.25rem 0;
   font-size: 0.95rem;
-  color: var(--text);
   border-bottom: 1px solid var(--border);
 }
 
 .exerciseItem:last-child {
   border-bottom: none;
+}
+
+.exerciseLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.45rem 0.5rem;
+  border-radius: var(--radius-md);
+  color: var(--text);
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.exerciseLink:hover {
+  background-color: var(--surface);
+  color: var(--brand-green);
+}
+
+.exerciseArrow {
+  color: var(--border);
+  font-size: 1rem;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.exerciseLink:hover .exerciseArrow {
+  color: var(--brand-green);
+  transform: translateX(3px);
 }
 
 .dayIndicators {
