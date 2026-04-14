@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "../../styles/WorkoutPlanDisplay.module.css";
 import { WorkoutPlanDisplayProps } from "../../domain/models/interfaces/IWorkoutPlanDisplayProps";
+import { WorkoutPlanExercise } from "../../domain/models/interfaces/IWorkoutPlanExercise";
 
 export default function WorkoutPlanDisplay({ plan }: WorkoutPlanDisplayProps) {
   const [currentDay, setCurrentDay] = useState(0);
@@ -45,9 +47,15 @@ export default function WorkoutPlanDisplay({ plan }: WorkoutPlanDisplayProps) {
             </button>
           </div>
           <ul className={styles.exerciseList}>
-            {dayPlan.exercises.map((exercise: string, exIdx: number) => (
+            {dayPlan.exercises.map((exercise: WorkoutPlanExercise, exIdx: number) => (
               <li key={exIdx} className={styles.exerciseItem}>
-                {exercise}
+                <Link
+                  to={`/exercise/${encodeURIComponent(exercise.name)}`}
+                  className={styles.exerciseLink}
+                >
+                  <span>{exercise.name}</span>
+                  <span className={styles.exerciseArrow}>→</span>
+                </Link>
               </li>
             ))}
           </ul>

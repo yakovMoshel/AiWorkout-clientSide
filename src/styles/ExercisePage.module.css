@@ -1,0 +1,27 @@
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.back {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.back:hover {
+  background-color: var(--surface);
+  color: var(--brand-green);
+}
+
+.status {
+  color: var(--text);
+  font-size: 1rem;
+}
