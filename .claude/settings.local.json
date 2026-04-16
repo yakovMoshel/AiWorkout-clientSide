@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout:*)",
+      "Bash(git pull:*)",
+      "Read(//c/Full-Stack/Ai-Workout/Project-Ai-Workuot/server/.git/**)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git merge:*)",
+      "Bash(git push:*)",
+      "Read(//c/Full-Stack/Ai-Workout/Project-Ai-Workuot/server/**)",
+      "Bash(git commit:*)"
+    ],
+    "additionalDirectories": [
+      "c:\\Full-Stack\\Ai-Workout\\Project-Ai-Workuot\\server\\src\\api\\models",
+      "c:\\Full-Stack\\Ai-Workout\\Project-Ai-Workuot\\server\\src\\api\\types",
+      "c:\\Full-Stack\\Ai-Workout\\Project-Ai-Workuot\\server\\src\\api\\services",
+      "c:\\Full-Stack\\Ai-Workout\\Project-Ai-Workuot\\server\\src\\api\\controller",
+      "c:\\Full-Stack\\Ai-Workout\\Project-Ai-Workuot\\server\\src\\routes"
+    ]
+  }
+}

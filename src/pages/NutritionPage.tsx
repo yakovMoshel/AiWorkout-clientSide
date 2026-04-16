@@ -3,7 +3,7 @@ import { useNutritionPlan } from "../hooks/useNutritionPlan";
 import styles from "../styles/NutritionPage.module.css";
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const TODAY = DAYS[(new Date().getDay() + 6) % 7]; // convert Sun=0 → Mon=0 index
+const TODAY = DAYS[(new Date().getDay() + 6) % 7]; // Sun=0 → index 6 (Sun), Mon=1 → index 0 (Mon)
 
 export default function NutritionPage() {
   const { nutritionPlan, weeklyMealPlan, loading, error } = useNutritionPlan();
@@ -12,6 +12,7 @@ export default function NutritionPage() {
   if (loading) return <div className={styles.container}><p className={styles.empty}>Loading nutrition plan...</p></div>;
   if (error) return <div className={styles.container}><p className={styles.empty}>{error}</p></div>;
 
+  // GPT returns flat structure; legacy RapidAPI wrapped in .result
   const result = nutritionPlan?.result ?? nutritionPlan;
 
   if (!result) {
@@ -100,6 +101,12 @@ export default function NutritionPage() {
                 const ingredients: string[] = Array.isArray(dish?.ingredients)
                   ? dish.ingredients
                   : [];
+                const hasMacros =
+                  dish?.protein_g != null ||
+                  dish?.carbs_g != null ||
+                  dish?.fat_g != null ||
+                  dish?.fiber_g != null;
+
                 return (
                   <div key={mealName} className={styles.mealCard}>
                     <div className={styles.mealHeader}>
@@ -108,7 +115,26 @@ export default function NutritionPage() {
                         <span className={styles.mealCalories}>{dish.calories} kcal</span>
                       )}
                     </div>
+
                     <p className={styles.dishTitle}>{dish?.name ?? "—"}</p>
+
+                    {hasMacros && (
+                      <div className={styles.mealMacroRow}>
+                        {dish.protein_g != null && (
+                          <span className={styles.mealMacroChip}>Protein {dish.protein_g}g</span>
+                        )}
+                        {dish.carbs_g != null && (
+                          <span className={styles.mealMacroChip}>Carbs {dish.carbs_g}g</span>
+                        )}
+                        {dish.fat_g != null && (
+                          <span className={styles.mealMacroChip}>Fat {dish.fat_g}g</span>
+                        )}
+                        {dish.fiber_g != null && (
+                          <span className={styles.mealMacroChip}>Fiber {dish.fiber_g}g</span>
+                        )}
+                      </div>
+                    )}
+
                     {ingredients.length > 0 && (
                       <ul className={styles.ingredientsList}>
                         {ingredients.map((ing, i) => (

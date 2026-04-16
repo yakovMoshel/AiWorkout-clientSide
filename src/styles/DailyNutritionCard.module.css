@@ -125,6 +125,22 @@
   white-space: nowrap;
 }
 
+.mealMacros {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.2rem;
+  padding-left: 120px;
+}
+
+.mealMacroChip {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background-color: var(--surface2);
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+}
+
 @media (max-width: 480px) {
   .macros {
     grid-template-columns: repeat(2, 1fr);

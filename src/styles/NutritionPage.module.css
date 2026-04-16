@@ -250,6 +250,22 @@
   font-weight: bold;
 }
 
+.mealMacroRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+.mealMacroChip {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.15rem 0.5rem;
+}
+
 @media (max-width: 600px) {
   .macroGrid {
     grid-template-columns: repeat(2, 1fr);

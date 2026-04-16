@@ -10,6 +10,7 @@ export default function DailyNutritionCard() {
 
   if (loading) return null;
 
+  // GPT returns flat structure; legacy RapidAPI wrapped in .result
   const result = nutritionPlan?.result ?? nutritionPlan;
 
   const calories = result?.calories_per_day ?? result?.daily_calories ?? result?.calories ?? null;
@@ -55,10 +56,30 @@ export default function DailyNutritionCard() {
               <div className={styles.divider} />
               <p className={styles.mealsTitle}>{todayName}'s Meals</p>
               {Object.entries(todayMeals).map(([mealName, dish]: [string, any]) => (
-                <div key={mealName} className={styles.mealRow}>
-                  <span className={styles.mealName}>{mealName}</span>
-                  <span className={styles.dishName}>{dish?.name ?? "—"}</span>
-                  <span className={styles.mealCalories}>{dish?.calories ? `${dish.calories} kcal` : ""}</span>
+                <div key={mealName}>
+                  <div className={styles.mealRow}>
+                    <span className={styles.mealName}>{mealName}</span>
+                    <span className={styles.dishName}>{dish?.name ?? "—"}</span>
+                    <span className={styles.mealCalories}>
+                      {dish?.calories ? `${dish.calories} kcal` : ""}
+                    </span>
+                  </div>
+                  {(dish?.protein_g || dish?.carbs_g || dish?.fat_g || dish?.fiber_g) && (
+                    <div className={styles.mealMacros}>
+                      {dish.protein_g != null && (
+                        <span className={styles.mealMacroChip}>P {dish.protein_g}g</span>
+                      )}
+                      {dish.carbs_g != null && (
+                        <span className={styles.mealMacroChip}>C {dish.carbs_g}g</span>
+                      )}
+                      {dish.fat_g != null && (
+                        <span className={styles.mealMacroChip}>F {dish.fat_g}g</span>
+                      )}
+                      {dish.fiber_g != null && (
+                        <span className={styles.mealMacroChip}>Fib {dish.fiber_g}g</span>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </>
