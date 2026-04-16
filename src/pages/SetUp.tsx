@@ -69,10 +69,16 @@ export default function SetupPage() {
     setStep((s) => s + 1);
   }
 
-  function handleSkip() {
-    setStepError("");
-    setStep((s) => s + 1);
+const TOTAL_STEPS = 8; 
+
+function handleSkip() {
+  setStepError("");
+  if (step === TOTAL_STEPS - 1) {
+    handleSubmit({ preventDefault: () => {} } as React.FormEvent);
+    return;
   }
+  setStep((s) => s + 1);
+}
 
   function handleBack() {
     setStepError("");

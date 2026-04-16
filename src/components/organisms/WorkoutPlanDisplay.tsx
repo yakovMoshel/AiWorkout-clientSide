@@ -53,7 +53,19 @@ export default function WorkoutPlanDisplay({ plan }: WorkoutPlanDisplayProps) {
                   to={`/exercise/${encodeURIComponent(exercise.name)}`}
                   className={styles.exerciseLink}
                 >
-                  <span>{exercise.name}</span>
+                  <div className={styles.exerciseImage}>
+                    {exercise.image ? (
+                      <img src={exercise.image} alt={exercise.name} loading="lazy" />
+                    ) : (
+                      <div className={styles.exerciseImagePlaceholder} />
+                    )}
+                  </div>
+                  <div className={styles.exerciseInfo}>
+                    <span className={styles.exerciseName}>{exercise.name}</span>
+                    {exercise.sets && (
+                      <span className={styles.exerciseSets}>{exercise.sets} sets</span>
+                    )}
+                  </div>
                   <span className={styles.exerciseArrow}>→</span>
                 </Link>
               </li>

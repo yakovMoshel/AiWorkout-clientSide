@@ -23,7 +23,6 @@ export default function MainNavigations() {
     { to: "/", label: "HOME" },
     ...(isAuthenticated
       ? [
-          { to: "/explore-exercises", label: "Explore Exercises" },
           { to: "/ai-chat", label: "AI Coach" },
           { to: "/profile", label: "Profile" },
         ]

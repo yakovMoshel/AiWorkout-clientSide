@@ -5,6 +5,8 @@
   background-color: var(--surface2);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  min-width: 0;
 }
 
 .title {
@@ -33,6 +35,8 @@
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .card:hover {
@@ -62,44 +66,81 @@
 
 .exerciseList {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.6rem;
 }
 
 .exerciseItem {
-  font-size: 0.95rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.exerciseItem:last-child {
-  border-bottom: none;
+  border: none;
 }
 
 .exerciseLink {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.45rem 0.5rem;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--surface);
   color: var(--text);
   text-decoration: none;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .exerciseLink:hover {
-  background-color: var(--surface);
+  border-color: var(--brand-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.exerciseImage {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #111921;
+}
+
+.exerciseImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.exerciseImagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a2633 0%, #111921 100%);
+}
+
+.exerciseInfo {
+  padding: 0.4rem 0.5rem 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.exerciseName {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.exerciseSets {
+  font-size: 0.7rem;
   color: var(--brand-green);
+  font-weight: 500;
 }
 
 .exerciseArrow {
-  color: var(--border);
-  font-size: 1rem;
-  transition: color 0.15s ease, transform 0.15s ease;
-}
-
-.exerciseLink:hover .exerciseArrow {
-  color: var(--brand-green);
-  transform: translateX(3px);
+  display: none;
 }
 
 .dayIndicators {

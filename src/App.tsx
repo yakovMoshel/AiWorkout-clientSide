@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import SetupPage from "./pages/SetUp";
 import MainLayout from "./components/templates/main-layout";
-import ExploreExercisesPage from "./pages/ExploreExercisesPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
@@ -33,14 +32,6 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <SetupPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/explore-exercises",
-        element: (
-          <ProtectedRoute>
-            <ExploreExercisesPage />
           </ProtectedRoute>
         ),
       },
