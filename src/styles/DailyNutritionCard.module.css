@@ -76,6 +76,55 @@
   padding: 1rem 0;
 }
 
+.divider {
+  height: 1px;
+  background-color: var(--border);
+  margin: 1rem 0;
+}
+
+.mealsTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+.mealRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+  gap: 0.5rem;
+}
+
+.mealRow:last-child {
+  border-bottom: none;
+}
+
+.mealName {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.dishName {
+  font-size: 0.875rem;
+  color: var(--text);
+  font-weight: 500;
+  flex: 1;
+}
+
+.mealCalories {
+  font-size: 0.8rem;
+  color: var(--brand-blue);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 @media (max-width: 480px) {
   .macros {
     grid-template-columns: repeat(2, 1fr);

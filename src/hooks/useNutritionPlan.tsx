@@ -4,6 +4,7 @@ import { getNutritionPlan } from "../services/nutritionService";
 
 export function useNutritionPlan() {
   const [nutritionPlan, setNutritionPlan] = useState<any>(null);
+  const [weeklyMealPlan, setWeeklyMealPlan] = useState<Record<string, Record<string, any>> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,6 +21,7 @@ export function useNutritionPlan() {
       try {
         const data = await getNutritionPlan();
         setNutritionPlan(data.nutritionPlan ?? null);
+        setWeeklyMealPlan(data.weeklyMealPlan ?? null);
       } catch (err) {
         console.error("Nutrition fetch error:", err);
         setError("Failed to fetch nutrition plan");
@@ -31,5 +33,5 @@ export function useNutritionPlan() {
     fetchPlan();
   }, [isAuthenticated]);
 
-  return { nutritionPlan, loading, error };
+  return { nutritionPlan, weeklyMealPlan, loading, error };
 }
