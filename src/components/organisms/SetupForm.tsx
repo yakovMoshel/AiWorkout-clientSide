@@ -8,6 +8,8 @@ import StepButton from "../atoms/StepButton";
 import styles from "../../styles/SetupPage.module.css";
 import { SetupFormProps } from "../../domain/models/interfaces/ISetupFormProps";
 
+const DIETARY_OPTIONS = ["Vegetarian", "Vegan", "Gluten-free", "Dairy-free", "Nut-free"];
+
 const questions = [
   {
     label: "Gender",
@@ -110,6 +112,52 @@ const questions = [
       />
     ),
   },
+  {
+    label: "Dietary Restrictions",
+    input: (formData: any, _onChange: any, _onDaysChange: any, onRestrictionsChange: any) => (
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+        {DIETARY_OPTIONS.map((option) => (
+          <label key={option} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer" }}>
+            <input
+              type="checkbox"
+              checked={formData.dietaryRestrictions?.includes(option) || false}
+              onChange={() => onRestrictionsChange(option)}
+            />
+            {option}
+          </label>
+        ))}
+      </div>
+    ),
+  },
+  {
+    label: "Target Weight (kg)",
+    input: (formData: any, onChange: any) => (
+      <InputField
+        type="number"
+        name="targetWeight"
+        placeholder="Target Weight (kg)"
+        value={formData.targetWeight}
+        onChange={onChange}
+      />
+    ),
+  },
+  {
+    label: "Daily Activity Level",
+    input: (formData: any, onChange: any) => (
+      <SelectField
+        name="activityLevel"
+        value={formData.activityLevel}
+        onChange={onChange}
+        options={[
+          { value: "Sedentary", label: "Sedentary (little or no exercise)" },
+          { value: "Light", label: "Light (exercise 1–3 days/week)" },
+          { value: "Moderate", label: "Moderate (exercise 3–5 days/week)" },
+          { value: "Active", label: "Active (exercise 6–7 days/week)" },
+          { value: "Very Active", label: "Very Active (hard exercise daily)" },
+        ]}
+      />
+    ),
+  },
 ];
 
 export default function SetupForm({
@@ -121,6 +169,7 @@ export default function SetupForm({
   isOptionalStep,
   onChange,
   onDaysChange,
+  onRestrictionsChange,
   onNext,
   onSkip,
   onBack,
@@ -137,7 +186,7 @@ export default function SetupForm({
 
       <StepQuestion
         label={questions[step].label}
-        input={questions[step].input(formData, onChange, onDaysChange)}
+        input={questions[step].input(formData, onChange, onDaysChange, onRestrictionsChange)}
       />
 
       {stepError && <p className={styles.error}>{stepError}</p>}

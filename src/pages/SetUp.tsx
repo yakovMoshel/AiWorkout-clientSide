@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import SetupForm from "../components/organisms/SetupForm";
 import { FormData } from "../domain/models/interfaces/IFormData";
 import { requestWorkoutPlan } from "../services/workoutService";
+import { requestNutritionPlan } from "../services/nutritionService";
 import { useAuth } from "src/store/auth-context";
 
 const initialState: FormData = {
@@ -14,9 +15,13 @@ const initialState: FormData = {
   experience: "",
   trainingDays: [],
   healthNotes: "",
+  dietaryRestrictions: [],
+  targetWeight: "",
+  activityLevel: "",
 };
 
-const OPTIONAL_STEPS = [7];
+const WORKOUT_LAST_STEP = 7;
+const OPTIONAL_STEPS = [7, 9];
 
 export default function SetupPage() {
   const navigate = useNavigate();
@@ -27,6 +32,7 @@ export default function SetupPage() {
   const [submitError, setSubmitError] = useState("");
 
     const { refetchUser } = useAuth();
+  const workoutPromiseRef = useRef<Promise<any> | null>(null);
 
 
   function handleChange(
@@ -47,6 +53,15 @@ export default function SetupPage() {
     setStepError("");
   }
 
+  function handleRestrictionsChange(restriction: string) {
+    setFormData((prev) => ({
+      ...prev,
+      dietaryRestrictions: prev.dietaryRestrictions.includes(restriction)
+        ? prev.dietaryRestrictions.filter((r) => r !== restriction)
+        : [...prev.dietaryRestrictions, restriction],
+    }));
+  }
+
   function isValidStep() {
     switch (step) {
       case 0: return !!formData.gender;
@@ -56,6 +71,7 @@ export default function SetupPage() {
       case 4: return !!formData.goal;
       case 5: return !!formData.experience;
       case 6: return formData.trainingDays.length > 0;
+      case 10: return !!formData.activityLevel;
       default: return true;
     }
   }
@@ -66,13 +82,31 @@ export default function SetupPage() {
       return;
     }
     setStepError("");
+
+    if (step === WORKOUT_LAST_STEP) {
+      workoutPromiseRef.current = requestWorkoutPlan({
+        ...formData,
+        age: Number(formData.age),
+        height: Number(formData.height),
+        weight: Number(formData.weight),
+      });
+    }
+
     setStep((s) => s + 1);
   }
 
-const TOTAL_STEPS = 8; 
+const TOTAL_STEPS = 11;
 
 function handleSkip() {
   setStepError("");
+  if (step === WORKOUT_LAST_STEP) {
+    workoutPromiseRef.current = requestWorkoutPlan({
+      ...formData,
+      age: Number(formData.age),
+      height: Number(formData.height),
+      weight: Number(formData.weight),
+    });
+  }
   if (step === TOTAL_STEPS - 1) {
     handleSubmit({ preventDefault: () => {} } as React.FormEvent);
     return;
@@ -90,12 +124,19 @@ function handleSkip() {
     setSubmitError("");
     setLoading(true);
     try {
-      await requestWorkoutPlan({
-        ...formData,
-        age: Number(formData.age),
-        height: Number(formData.height),
+      const nutritionPromise = requestNutritionPlan({
+        goal: formData.goal,
         weight: Number(formData.weight),
+        targetWeight: formData.targetWeight ? Number(formData.targetWeight) : undefined,
+        dietaryRestrictions: formData.dietaryRestrictions,
+        activityLevel: formData.activityLevel || "Moderate",
       });
+
+      await Promise.all([
+        workoutPromiseRef.current ?? Promise.resolve(),
+        nutritionPromise,
+      ]);
+
       await refetchUser();
       navigate("/");
     } catch (err: any) {
@@ -115,6 +156,7 @@ function handleSkip() {
       isOptionalStep={OPTIONAL_STEPS.includes(step)}
       onChange={handleChange}
       onDaysChange={handleDaysChange}
+      onRestrictionsChange={handleRestrictionsChange}
       onNext={handleNext}
       onSkip={handleSkip}
       onBack={handleBack}

@@ -7,6 +7,7 @@ export interface SetupFormProps {
   isOptionalStep: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
   onDaysChange: (day: string) => void;
+  onRestrictionsChange: (restriction: string) => void;
   onNext: () => void;
   onSkip: () => void;
   onBack: () => void;
