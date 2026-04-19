@@ -115,16 +115,20 @@ const questions = [
   {
     label: "Dietary Restrictions",
     input: (formData: any, _onChange: any, _onDaysChange: any, onRestrictionsChange: any) => (
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+      <div className={styles.daysContainer}>
         {DIETARY_OPTIONS.map((option) => (
-          <label key={option} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer" }}>
-            <input
-              type="checkbox"
-              checked={formData.dietaryRestrictions?.includes(option) || false}
-              onChange={() => onRestrictionsChange(option)}
-            />
+          <button
+            type="button"
+            key={option}
+            onClick={() => onRestrictionsChange(option)}
+            className={
+              formData.dietaryRestrictions?.includes(option)
+                ? `${styles.dayButton} ${styles.selected}`
+                : styles.dayButton
+            }
+          >
             {option}
-          </label>
+          </button>
         ))}
       </div>
     ),
@@ -175,13 +179,17 @@ export default function SetupForm({
   onBack,
   onSubmit,
 }: SetupFormProps) {
+  const isNutritionSection = step >= 8;
+
   return (
     <form onSubmit={onSubmit} className={styles.formContainer}>
-      <h2 className={styles.title}>Setup Your Profile</h2>
+      <h2 className={styles.title}>
+        {isNutritionSection ? "Nutrition Setup" : "Setup Your Profile"}
+      </h2>
 
       {/* Progress indicator */}
       <p className={styles.stepIndicator}>
-        Step {step + 1} of {questions.length}
+        Step {step + 1} of {questions.length}{isNutritionSection ? " — Nutrition" : " — Workout"}
       </p>
 
       <StepQuestion

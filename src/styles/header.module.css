@@ -1,63 +1,67 @@
-.header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 24px;
-    margin: 20px;
-    border-radius: var(--radius-md);
-    height: 60px;
-    background-color: var(--surface);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border);
-    gap: 16px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px;
+  margin: 12px 16px;
+  border-radius: var(--radius-lg);
+  height: 62px;
+  /* glass */
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  position: sticky;
+  top: 12px;
+  z-index: 100;
+  gap: 16px;
 }
 
-.logoLink{        
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 10px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  transition: var(--transition);
 }
 
+.logoLink:hover {
+  transform: scale(1.04);
+}
 
-
-.logo{
-    max-height: 100%;
-    width: auto;
-    max-width: 180px;
-    display: block;
-    object-fit: contain;
-    /* filter: drop-shadow(0 6px 12px rgba(0, 82, 164, 0.22)); */
+.logo {
+  max-height: 100%;
+  width: auto;
+  max-width: 160px;
+  display: block;
+  object-fit: contain;
 }
 
 @media (max-width: 768px) {
-    .header{
-        margin: 12px;
-        padding: 10px 14px;
-        height: auto;
-        flex-wrap: wrap;
-    }
+  .header {
+    margin: 8px 10px;
+    padding: 10px 14px;
+    height: auto;
+    flex-wrap: wrap;
+    top: 8px;
+  }
 
-    .logoLink{
-        padding: 4px 8px;
-    }
-
-    .logo{
-        max-width: 140px;
-        height: 40px;
-    }
+  .logo {
+    max-width: 130px;
+    height: 38px;
+  }
 }
 
 @media (max-width: 480px) {
-    .header{
-        margin: 8px;
-        padding: 8px 12px;
-        gap: 10px;
-    }
+  .header {
+    margin: 6px 8px;
+    padding: 8px 12px;
+    gap: 10px;
+  }
 
-    .logo{
-        max-width: 120px;
-        height: 36px;
-    }
+  .logo {
+    max-width: 110px;
+    height: 34px;
+  }
 }

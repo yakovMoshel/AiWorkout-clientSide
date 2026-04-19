@@ -1,12 +1,35 @@
-/* src/styles/LoginPage.module.css */
+/* Full-page background wrapper */
+.pageWrapper {
+  min-height: calc(100vh - 90px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -20px;
+  padding: 40px 20px;
+  background-image:
+    linear-gradient(to bottom, rgba(27,43,107,0.75), rgba(8,8,8,0.88)),
+    url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+}
 
+/* Glass card container */
 .container {
-  max-width: 400px;
-  margin: 4rem auto;
+  width: 100%;
+  max-width: 420px;
   padding: 2.5rem;
-  background-color: var(--surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-xl);
+  animation: fadeSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
 }
 
 .form {
@@ -15,11 +38,12 @@
 }
 
 .title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
+  font-size: 1.9rem;
+  font-weight: 800;
+  margin-bottom: 1.75rem;
   text-align: center;
   color: var(--text);
+  letter-spacing: -0.02em;
 }
 
 .input {
@@ -31,19 +55,26 @@
 }
 
 .button {
-  background-color: var(--brand-blue);
+  background: var(--brand-gradient);
   color: #ffffff;
-  padding: 0.75rem;
+  padding: 0.85rem;
   border: none;
   border-radius: var(--radius-md);
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  animation: pulseGlow 2s infinite;
 }
 
 .button:hover {
-  background-color: var(--brand-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 191, 165, 0.35);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(0, 191, 165, 0.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(0, 191, 165, 0);   }
 }
 
 .error {
@@ -54,19 +85,12 @@
 }
 
 @media (max-width: 768px) {
-  .container {
-    margin: 2.5rem 16px;
-    padding: 2rem;
-  }
-
-  .title {
-    font-size: 1.5rem;
-  }
+  .pageWrapper { margin: -16px; padding: 32px 16px; }
+  .container   { padding: 2rem; }
+  .title       { font-size: 1.6rem; }
 }
 
 @media (max-width: 480px) {
-  .container {
-    margin: 2rem 12px;
-    padding: 1.5rem;
-  }
+  .pageWrapper { margin: -12px; padding: 24px 12px; }
+  .container   { padding: 1.5rem; border-radius: var(--radius-lg); }
 }

@@ -25,9 +25,12 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.header}>
-        Welcome back, {user ? user.name : "athlete please sign in"}! 🏋️‍♂️
-      </h2>
+      <div className={styles.hero}>
+        <h1 className={styles.heroTitle}>Your AI-Powered Workout Companion</h1>
+        <p className={styles.heroSub}>
+          Welcome back, {user ? user.name : "athlete"}!
+        </p>
+      </div>
 
       <HomeSections />
 

@@ -1,29 +1,80 @@
-/* src/styles/DashboardPage.module.css */
-
 .container {
   max-width: 900px;
   margin: auto;
+  padding: 0 24px 48px;
+  animation: fadeSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  margin-bottom: 2rem;
+  padding: 4rem 2.5rem;
+  background-image:
+    linear-gradient(to bottom, rgba(27,43,107,0.7), rgba(8,8,8,0.9)),
+    url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+.heroSub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.85);
+  margin: 0;
+}
+
+/* Legacy header class (no longer rendered but kept for safety) */
 .header {
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 800;
   margin-bottom: 2rem;
   text-align: center;
   color: var(--text);
-  letter-spacing: 0.01em;
+  letter-spacing: -0.02em;
 }
 
+/* Cards used by WorkoutCard */
 .card {
-  background-color: var(--surface);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-sm);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: var(--shadow-lg);
 }
 
 .sectionTitle {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
   margin-bottom: 1rem;
   color: var(--text);
 }
@@ -37,20 +88,19 @@
 }
 
 .navButton {
-  background-color: var(--brand-blue);
+  background: var(--brand-gradient);
   color: #ffffff;
-  padding: 0.6rem 1.2rem;
+  padding: 0.65rem 1.4rem;
   border: none;
   border-radius: var(--radius-md);
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
 }
 
 .navButton:hover {
-  background-color: var(--brand-blue-dark);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 191, 165, 0.35);
 }
 
 .weekTracker {
@@ -60,37 +110,8 @@
   margin-top: 1rem;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 24px 16px 32px;
-  }
-
-  .header {
-    font-size: 1.6rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .weekTracker {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 20px 12px 28px;
-  }
-
-  .header {
-    font-size: 1.4rem;
-  }
-
-  .weekTracker {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 .dayBox {
-  background-color: var(--surface);
+  background-color: var(--surface2);
   padding: 0.6rem;
   text-align: center;
   border-radius: var(--radius-md);
@@ -100,7 +121,22 @@
 
 .completed {
   display: block;
-  color: var(--brand-green);
+  color: var(--brand-accent);
   font-weight: bold;
   font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .container  { padding: 0 16px 32px; }
+  .heroTitle  { font-size: 1.8rem; }
+  .heroSub    { font-size: 1rem; }
+  .hero       { padding: 3rem 1.5rem; }
+  .weekTracker { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .container  { padding: 0 12px 28px; }
+  .heroTitle  { font-size: 1.5rem; }
+  .hero       { padding: 2.5rem 1.25rem; border-radius: var(--radius-lg); }
+  .weekTracker { grid-template-columns: repeat(2, 1fr); }
 }

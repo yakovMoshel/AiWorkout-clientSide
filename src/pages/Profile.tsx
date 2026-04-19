@@ -10,7 +10,7 @@ export default function Profile() {
     return <div className={styles.container}>User not found</div>;
   }
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} animate-enter`}>
       <ProfileCard user={user} />
       <button
         onClick={() => navigate("/profile/Edit")}
