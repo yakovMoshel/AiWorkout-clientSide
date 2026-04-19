@@ -22,8 +22,10 @@ export default function LoginPage() {
   }
 
   return (
-    <div className={styles.container}>
-      <LoginForm error={error} onSubmit={handleLogin} />
+    <div className={styles.pageWrapper}>
+      <div className={styles.container}>
+        <LoginForm error={error} onSubmit={handleLogin} />
+      </div>
     </div>
   );
 }

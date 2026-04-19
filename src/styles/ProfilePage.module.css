@@ -4,9 +4,8 @@
   flex-direction: column;
   gap: 32px;
   padding: 40px 24px;
-  background: var(--bg);
   width: 100%;
-  max-width: 960px;
+  max-width: 860px;
   margin: 0 auto;
 }
 

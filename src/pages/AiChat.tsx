@@ -21,7 +21,7 @@ export const AiChatPage = () => {
   };
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} animate-enter`}>
       <ChatHeader usedMessages={usedMessages} />
       <ChatMessageList messages={messages} loading={loading} error={error} />
       <ChatFooter

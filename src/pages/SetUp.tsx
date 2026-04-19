@@ -92,15 +92,20 @@ export default function SetupPage() {
   }
 
   return (
-    <SetupForm
-      step={step}
-      formData={formData}
-      pending={loading}
-      onChange={handleChange}
-      onDaysChange={handleDaysChange}
-      onNext={handleNext}
-      onBack={handleBack}
-      onSubmit={handleSubmit}
-    />
+    <div className={styles.setupLayout}>
+      <div className={styles.formWrapper}>
+        <SetupForm
+          step={step}
+          formData={formData}
+          pending={loading}
+          onChange={handleChange}
+          onDaysChange={handleDaysChange}
+          onNext={handleNext}
+          onBack={handleBack}
+          onSubmit={handleSubmit}
+        />
+      </div>
+      <div className={styles.sidePanel} aria-hidden="true" />
+    </div>
   );
 }
