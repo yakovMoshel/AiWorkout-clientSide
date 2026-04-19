@@ -4,6 +4,7 @@ export interface SetupFormProps {
   pending: boolean;
   onChange: (e: React.ChangeEvent<any>) => void;
   onDaysChange: (day: string) => void;
+  onRestrictionsChange: (restriction: string) => void;
   onNext: () => void;
   onBack: () => void;
   onSubmit: (e: React.FormEvent) => void;

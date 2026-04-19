@@ -1,5 +1,6 @@
 import WorkoutCard from "../molecules/WorkoutCard";
 import WorkoutPlanDisplay from "../organisms/WorkoutPlanDisplay";
+import DailyNutritionCard from "../organisms/DailyNutritionCard";
 import { useWorkoutPlan } from "../../hooks/useWorkoutPlan";
 import { mapPlanForDisplay } from "../../utils/mapWorkoutPlan";
 
@@ -25,6 +26,7 @@ export default function HomeSections() {
         }
       />
       <WorkoutPlanDisplay plan={mappedPlan} />
+      <DailyNutritionCard />
     </>
   );
 }

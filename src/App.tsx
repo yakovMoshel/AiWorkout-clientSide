@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import CalendarSetupPage from "./pages/CalendarSetupPage";
 import { AiChatPage } from "./pages/AiChat";
+import NutritionPage from "./pages/NutritionPage";
 // import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
@@ -84,7 +85,15 @@ const router = createBrowserRouter([
             <AiChatPage/>
           </ProtectedRoute>
         ),
-      }
+      },
+      {
+        path: "/nutrition",
+        element: (
+          <ProtectedRoute>
+            <NutritionPage />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);

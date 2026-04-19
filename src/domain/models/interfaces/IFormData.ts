@@ -7,4 +7,7 @@ export interface FormData {
   experience: string;
   trainingDays: string[];
   healthNotes: string;
+  dietaryRestrictions: string[];
+  targetWeight: string;
+  activityLevel: string;
 }

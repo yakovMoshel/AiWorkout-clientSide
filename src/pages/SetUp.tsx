@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SetupForm from "../components/organisms/SetupForm";
 import { FormData } from "../domain/models/interfaces/IFormData";
 import { requestWorkoutPlan } from "../services/workoutService";
+import { requestNutritionPlan } from "../services/nutritionService";
+import styles from "../styles/SetupPage.module.css";
 
 const initialState: FormData = {
   gender: "",
@@ -13,6 +15,9 @@ const initialState: FormData = {
   experience: "",
   trainingDays: [],
   healthNotes: "",
+  dietaryRestrictions: [],
+  targetWeight: "",
+  activityLevel: "",
 };
 
 export default function SetupPage() {
@@ -20,6 +25,9 @@ export default function SetupPage() {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState<FormData>(initialState);
   const [loading, setLoading] = useState(false);
+
+  // Holds the workout promise fired at step 7→8 transition
+  const workoutPromiseRef = useRef<Promise<any> | null>(null);
 
   function handleChange(
     e: React.ChangeEvent<
@@ -39,6 +47,15 @@ export default function SetupPage() {
     }));
   }
 
+  function handleRestrictionsChange(restriction: string) {
+    setFormData((prev) => ({
+      ...prev,
+      dietaryRestrictions: prev.dietaryRestrictions.includes(restriction)
+        ? prev.dietaryRestrictions.filter((r: string) => r !== restriction)
+        : [...prev.dietaryRestrictions, restriction],
+    }));
+  }
+
   function isValidStep() {
     switch (step) {
       case 0:
@@ -55,6 +72,10 @@ export default function SetupPage() {
         return !!formData.experience;
       case 6:
         return formData.trainingDays.length > 0;
+      case 9:
+        return true; // targetWeight is optional
+      case 10:
+        return !!formData.activityLevel;
       default:
         return true;
     }
@@ -65,6 +86,21 @@ export default function SetupPage() {
       alert("נא למלא את השדה");
       return;
     }
+
+    // Fire workout request in background when transitioning from step 7 → 8
+    if (step === 7) {
+      workoutPromiseRef.current = requestWorkoutPlan({
+        gender: formData.gender,
+        age: Number(formData.age),
+        height: Number(formData.height),
+        weight: Number(formData.weight),
+        goal: formData.goal,
+        experience: formData.experience,
+        trainingDays: formData.trainingDays,
+        healthNotes: formData.healthNotes,
+      });
+    }
+
     setStep(step + 1);
   }
 
@@ -77,12 +113,27 @@ export default function SetupPage() {
     setLoading(true);
 
     try {
-      await requestWorkoutPlan({
-        ...formData,
-        age: Number(formData.age),
-        height: Number(formData.height),
-        weight: Number(formData.weight),
-      });
+      await Promise.all([
+        // Use already-running workout promise, or fire now as fallback
+        workoutPromiseRef.current ??
+          requestWorkoutPlan({
+            gender: formData.gender,
+            age: Number(formData.age),
+            height: Number(formData.height),
+            weight: Number(formData.weight),
+            goal: formData.goal,
+            experience: formData.experience,
+            trainingDays: formData.trainingDays,
+            healthNotes: formData.healthNotes,
+          }),
+        requestNutritionPlan({
+          goal: formData.goal,
+          weight: Number(formData.weight),
+          targetWeight: formData.targetWeight ? Number(formData.targetWeight) : undefined,
+          dietaryRestrictions: formData.dietaryRestrictions,
+          activityLevel: formData.activityLevel || "Moderate",
+        }),
+      ]);
       navigate("/");
     } catch (err: any) {
       alert(err.message || "Something went wrong");
@@ -100,6 +151,7 @@ export default function SetupPage() {
           pending={loading}
           onChange={handleChange}
           onDaysChange={handleDaysChange}
+          onRestrictionsChange={handleRestrictionsChange}
           onNext={handleNext}
           onBack={handleBack}
           onSubmit={handleSubmit}

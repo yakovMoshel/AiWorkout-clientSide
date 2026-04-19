@@ -8,6 +8,8 @@ import StepButton from "../atoms/StepButton";
 import styles from "../../styles/SetupPage.module.css";
 import { SetupFormProps } from "../../domain/models/interfaces/ISetupFormProps";
 
+const DIETARY_OPTIONS = ["None", "Vegetarian", "Vegan", "Gluten-free", "Dairy-free"];
+
 const questions = [
   {
     label: "Gender",
@@ -92,7 +94,7 @@ const questions = [
   },
   {
     label: "Training Days",
-    input: (formData: any, onChange: any, onDaysChange: any) => (
+    input: (formData: any, _onChange: any, onDaysChange: any) => (
       <TrainingDaysSelector
         selectedDays={formData.trainingDays}
         onToggle={onDaysChange}
@@ -110,6 +112,57 @@ const questions = [
       />
     ),
   },
+  // Nutrition steps
+  {
+    label: "Dietary Restrictions",
+    input: (formData: any, _onChange: any, _onDaysChange: any, onRestrictionsChange: any) => (
+      <div className={styles.daysContainer}>
+        {DIETARY_OPTIONS.map((option) => (
+          <button
+            type="button"
+            key={option}
+            onClick={() => onRestrictionsChange(option)}
+            className={
+              formData.dietaryRestrictions.includes(option)
+                ? `${styles.dayButton} ${styles.selected}`
+                : styles.dayButton
+            }
+          >
+            {option}
+          </button>
+        ))}
+      </div>
+    ),
+  },
+  {
+    label: "Target Weight (kg) — optional",
+    input: (formData: any, onChange: any) => (
+      <InputField
+        type="number"
+        name="targetWeight"
+        placeholder="Target weight (optional)"
+        value={formData.targetWeight}
+        onChange={onChange}
+      />
+    ),
+  },
+  {
+    label: "Daily Activity Level",
+    input: (formData: any, onChange: any) => (
+      <SelectField
+        name="activityLevel"
+        value={formData.activityLevel}
+        onChange={onChange}
+        options={[
+          { value: "Sedentary", label: "Sedentary (little or no exercise)" },
+          { value: "Light", label: "Light (1-3 days/week)" },
+          { value: "Moderate", label: "Moderate (3-5 days/week)" },
+          { value: "Active", label: "Active (6-7 days/week)" },
+          { value: "Very Active", label: "Very Active (intense daily training)" },
+        ]}
+      />
+    ),
+  },
 ];
 
 export default function SetupForm({
@@ -118,30 +171,35 @@ export default function SetupForm({
   pending,
   onChange,
   onDaysChange,
+  onRestrictionsChange,
   onNext,
   onBack,
   onSubmit,
 }: SetupFormProps) {
+  const isNutritionSection = step >= 8;
+
   return (
     <form onSubmit={onSubmit} className={styles.formContainer}>
-      <h2 className={styles.title}>Setup Your Profile</h2>
+      <h2 className={styles.title}>
+        {isNutritionSection ? "Nutrition Setup" : "Setup Your Profile"}
+      </h2>
+      <p className={styles.stepIndicator}>
+        Step {step + 1} of {questions.length}
+        {isNutritionSection ? " — Nutrition" : " — Workout"}
+      </p>
       <StepQuestion
         label={questions[step].label}
-        input={
-          step === 6
-            ? questions[step].input(formData, onChange, onDaysChange)
-            : questions[step].input(formData, onChange, onDaysChange)
-        }
+        input={questions[step].input(formData, onChange, onDaysChange, onRestrictionsChange)}
       />
       <div style={{ marginTop: 20 }}>
         {step > 0 && (
           <StepButton
             type="button"
             onClick={onBack}
-            className={styles.submitButton}
+            className={styles.skipButton}
             style={{ marginRight: 10 }}
           >
-            הקודם
+            Back
           </StepButton>
         )}
         {step < questions.length - 1 ? (
@@ -150,7 +208,7 @@ export default function SetupForm({
             onClick={onNext}
             className={styles.submitButton}
           >
-            הבא
+            Next
           </StepButton>
         ) : (
           <StepButton
