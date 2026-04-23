@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import styles from "../../styles/WorkoutPlanDisplay.module.css";
 import { WorkoutPlanDisplayProps } from "../../domain/models/interfaces/IWorkoutPlanDisplayProps";
-import { WorkoutPlanExercise } from "../../domain/models/interfaces/IWorkoutPlanExercise";
+import ExerciseGrid from "../molecules/ExerciseGrid";
 
 export default function WorkoutPlanDisplay({ plan }: WorkoutPlanDisplayProps) {
   const [currentDay, setCurrentDay] = useState(0);
@@ -46,31 +45,7 @@ export default function WorkoutPlanDisplay({ plan }: WorkoutPlanDisplayProps) {
               &gt;
             </button>
           </div>
-          <ul className={styles.exerciseList}>
-            {dayPlan.exercises.map((exercise: WorkoutPlanExercise, exIdx: number) => (
-              <li key={exIdx} className={styles.exerciseItem}>
-                <Link
-                  to={`/exercise/${encodeURIComponent(exercise.name)}`}
-                  className={styles.exerciseLink}
-                >
-                  <div className={styles.exerciseImage}>
-                    {exercise.image ? (
-                      <img src={exercise.image} alt={exercise.name} loading="lazy" />
-                    ) : (
-                      <div className={styles.exerciseImagePlaceholder} />
-                    )}
-                  </div>
-                  <div className={styles.exerciseInfo}>
-                    <span className={styles.exerciseName}>{exercise.name}</span>
-                    {exercise.sets && (
-                      <span className={styles.exerciseSets}>{exercise.sets} sets</span>
-                    )}
-                  </div>
-                  <span className={styles.exerciseArrow}>→</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <ExerciseGrid exercises={dayPlan.exercises} />
         </div>
       </div>
 

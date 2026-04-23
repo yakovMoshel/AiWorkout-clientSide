@@ -1,21 +1,143 @@
-.info {
-  font-size: 1.1rem;
-  margin-bottom: 12px;
+/* ── Outer card ── */
+.card {
+  width: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+/* ── Hero: avatar + name ── */
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.avatarWrap :global(.avatar) {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--brand-accent);
+  box-shadow: 0 0 0 4px rgba(0, 191, 165, 0.15);
+  flex-shrink: 0;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── Stats grid ── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 1.25rem 0.5rem;
+  border-right: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.statCard:last-child {
+  border-right: none;
+}
+
+.statCard:hover {
+  background: rgba(0, 191, 165, 0.04);
+}
+
+.statIcon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.statValue {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--text-muted);
 }
-.name {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--text);
-  margin-bottom: 6px;
-}
 
-@media (max-width: 768px) {
-  .name {
-    font-size: 1.6rem;
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .hero {
+    padding: 1.5rem 1.25rem 1.25rem;
+    gap: 1rem;
   }
 
-  .info {
-    font-size: 1rem;
+  .name {
+    font-size: 1.35rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .statCard {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* remove right border on last in each row of 3 */
+  .statCard:nth-child(3n) {
+    border-right: none;
+  }
+
+  /* last row: no bottom border */
+  .statCard:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .statCard:nth-child(3n) {
+    border-right: 1px solid var(--border);
+  }
+
+  .statCard:nth-child(2n) {
+    border-right: none;
   }
 }

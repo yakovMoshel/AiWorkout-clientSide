@@ -5,6 +5,7 @@ export interface User {
   age: number;
   height: number;      
   weight: number;
+  targetWeight?: number;
   goal: string;
   image?: string;
   aiUsage: number;

@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useWorkoutPlan } from "../hooks/useWorkoutPlan";
 import { WorkoutPlanExercise } from "../domain/models/interfaces/IWorkoutPlanExercise";
 import WorkoutExerciseCard from "../components/organisms/WorkoutExerciseCard";
+import { useExerciseLog } from "../hooks/useExerciseLog";
 import styles from "../styles/ExercisePage.module.css";
 
 export default function ExercisePage() {
@@ -14,6 +15,8 @@ export default function ExercisePage() {
   const exercise = workouts
     .flatMap((day) => day.exercises as unknown as WorkoutPlanExercise[])
     .find((ex) => ex.name === decodedName);
+
+  const { pr, saveLog } = useExerciseLog(decodedName);
 
   if (loading) {
     return (
@@ -30,7 +33,7 @@ export default function ExercisePage() {
           {error ?? `Exercise "${decodedName}" not found.`}
         </p>
         <button className={styles.back} onClick={() => navigate(-1)}>
-          ← Back
+          Back
         </button>
       </div>
     );
@@ -39,9 +42,9 @@ export default function ExercisePage() {
   return (
     <div className={styles.container}>
       <button className={styles.back} onClick={() => navigate(-1)}>
-        ← Back
+        Back
       </button>
-      <WorkoutExerciseCard exercise={exercise} />
+      <WorkoutExerciseCard exercise={exercise} pr={pr} saveLog={saveLog} />
     </div>
   );
 }

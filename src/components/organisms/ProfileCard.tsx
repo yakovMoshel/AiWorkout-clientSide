@@ -5,10 +5,11 @@ import { User } from "../../domain/models/interfaces/IUser";
 const ProfileCard: React.FC<{ user: User }> = ({ user }) => (
   <ProfileInfo
     name={user.name}
-    email={user.email}      
+    email={user.email}
     age={user.age}
-    height={user.height}    
+    height={user.height}
     weight={user.weight}
+    targetWeight={user.targetWeight}
     goal={user.goal}
     image={user.image}
   />
