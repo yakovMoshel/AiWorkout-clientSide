@@ -1,67 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "../../styles/WorkoutExerciseCard.module.css";
-import { WorkoutExerciseCardProps } from "../../domain/models/interfaces/IWorkoutPlanExercise";
-
-// ── Icons ──────────────────────────────────────────────────────────────────
-
-function DumbbellIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="1.5" y="8" width="3" height="8" rx="1.5" />
-      <rect x="19.5" y="8" width="3" height="8" rx="1.5" />
-      <rect x="5" y="5" width="3" height="14" rx="1.5" />
-      <rect x="16" y="5" width="3" height="14" rx="1.5" />
-      <line x1="8" y1="12" x2="16" y2="12" />
-    </svg>
-  );
-}
-
-function SetsIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M17 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h10z" />
-      <path d="M17 10a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h10z" />
-      <path d="M17 18a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h10z" />
-    </svg>
-  );
-}
-
-function RepsIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-    </svg>
-  );
-}
-
-function ClockIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  );
-}
-
-// ── Constants ──────────────────────────────────────────────────────────────
+import { WorkoutExerciseCardProps } from "../../domain/models/interfaces/IWorkoutExerciseCardProps";
+import { StatItem } from "../../domain/models/interfaces/IStatItem";
+import { SetRow } from "../../domain/models/interfaces/ISetRow";
+import { DumbbellIcon, SetsIcon, RepsIcon, ClockIcon } from "../atoms/WorkoutIcons";
 
 const STAT_META: Record<string, { icon: (c?: string) => React.ReactElement; color: string }> = {
-  Sets:      { icon: (c) => <SetsIcon className={c} />,    color: "#FF6B35" },
-  Reps:      { icon: (c) => <RepsIcon className={c} />,    color: "#FF6B35" },
-  Duration:  { icon: (c) => <ClockIcon className={c} />,   color: "#2196D3" },
+  Sets:      { icon: (c) => <SetsIcon className={c} />,     color: "#FF6B35" },
+  Reps:      { icon: (c) => <RepsIcon className={c} />,     color: "#FF6B35" },
+  Duration:  { icon: (c) => <ClockIcon className={c} />,    color: "#2196D3" },
   Equipment: { icon: (c) => <DumbbellIcon className={c} />, color: "#00BFA5" },
 };
 
 const REST_SECONDS = 180;
-
-interface StatItem { label: string; value: string }
-interface SetRow   { weight: string; reps: string; done: boolean }
-
-// ── Timer Widget (draggable floating) ─────────────────────────────────────
 
 function TimerWidget({ onDone }: { onDone: () => void }) {
   const [remaining, setRemaining] = useState(REST_SECONDS);
@@ -140,7 +91,6 @@ function TimerWidget({ onDone }: { onDone: () => void }) {
   );
 }
 
-
 export default function WorkoutExerciseCard({ exercise, pr = 0, saveLog, onAllCompleted }: WorkoutExerciseCardProps) {
   const { name, duration, repetitions, sets, equipment, image } = exercise;
 
@@ -199,7 +149,6 @@ export default function WorkoutExerciseCard({ exercise, pr = 0, saveLog, onAllCo
       {showTimer && <TimerWidget onDone={() => setShowTimer(false)} />}
 
       <article className={styles.card}>
-        {/* ── Hero ── */}
         <div className={styles.hero}>
           {image ? (
             <img src={image} alt={name} className={styles.heroImage} loading="lazy" />
@@ -213,7 +162,6 @@ export default function WorkoutExerciseCard({ exercise, pr = 0, saveLog, onAllCo
           <h2 className={styles.heroName}>{name}</h2>
         </div>
 
-        {/* ── Stats ── */}
         {stats.length > 0 && (
           <div className={styles.statsGrid}>
             {stats.map(({ label, value }) => {
@@ -233,7 +181,6 @@ export default function WorkoutExerciseCard({ exercise, pr = 0, saveLog, onAllCo
           </div>
         )}
 
-        {/* ── Set Tracker ── */}
         <div className={styles.tracker}>
           <div className={styles.trackerHeader}>
             <span className={styles.trackerTitle}>Set Tracker</span>

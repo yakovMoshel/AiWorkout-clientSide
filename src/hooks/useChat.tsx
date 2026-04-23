@@ -1,12 +1,9 @@
 import { useState, useCallback } from "react";
-import { sendChatMessage } from "../services/Chatservice";
-import { IMessage } from "src/domain/models/interfaces/Ichat";
+import { sendChatMessage } from "../services/chatService";
+import { IMessage } from "src/domain/models/interfaces/IChat";
+import { UseChatProps } from "../domain/models/interfaces/IUseChatProps";
 
 const AI_LIMIT = 10;
-
-interface UseChatProps {
-  initialUsage: number;
-}
 
 export const useChat = ({ initialUsage }: UseChatProps) => {
   const [messages, setMessages] = useState<IMessage[]>([]);

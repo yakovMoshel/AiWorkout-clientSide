@@ -1,5 +1,5 @@
 import styles from "../../styles/ExerciseDayCard.module.css";
-import { ExerciseDayCardProps } from "../../domain/models/interfaces/IWorkoutPlanExercise";
+import { ExerciseDayCardProps } from "../../domain/models/interfaces/IExerciseDayCardProps";
 import WorkoutExerciseCard from "./WorkoutExerciseCard";
 
 export default function ExerciseDayCard({ day, exercises }: ExerciseDayCardProps) {

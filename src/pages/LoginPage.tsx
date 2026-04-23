@@ -3,12 +3,15 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import AuthTabs from "../components/molecules/AuthTabs";
 import { loginAction, registerAction } from "../services/authService";
 import { useAuth } from "../store/auth-context";
+import { RegisterForm } from "../domain/models/interfaces/IRegisterForm";
+
+const REDIRECT_DELAY_MS = 100;
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const { refetchUser } = useAuth();
   const [searchParams] = useSearchParams();
-  const defaultTab = searchParams.get("tab") === "register" ? "register" : "login";  // ← add
+  const defaultTab = searchParams.get("tab") === "register" ? "register" : "login";
 
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
@@ -25,14 +28,14 @@ export default function LoginPage() {
     }
   }
 
-  async function handleRegister(form: any) {
+  async function handleRegister(form: RegisterForm) {
     setRegisterError("");
     try {
       setRegisterLoading(true);
       const { error } = await registerAction({}, form);
       if (error) throw new Error(error);
       await refetchUser();
-      setTimeout(() => navigate("/setup"), 100);
+      setTimeout(() => navigate("/setup"), REDIRECT_DELAY_MS);
     } catch (err: any) {
       setRegisterError(
         err?.response?.data?.message || "Registration failed. Please try again."

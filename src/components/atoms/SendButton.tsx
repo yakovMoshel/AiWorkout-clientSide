@@ -1,9 +1,5 @@
 import styles from "../../../src/styles/SendButton.module.css";
-
-interface SendButtonProps {
-  onClick: () => void;
-  disabled: boolean;
-}
+import { SendButtonProps } from "../../domain/models/interfaces/ISendButtonProps";
 
 export const SendButton = ({ onClick, disabled }: SendButtonProps) => (
   <button

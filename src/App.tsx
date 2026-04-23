@@ -4,7 +4,7 @@ import SetupPage from "./pages/SetUp";
 import MainLayout from "./components/templates/main-layout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { logout } from "./utils/auth";
 import { AuthProvider } from "./store/auth-context";
 import Profile from "./pages/Profile";

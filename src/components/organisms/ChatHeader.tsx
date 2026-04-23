@@ -1,11 +1,8 @@
 import { UsageDots } from "../atoms/UsageDots";
 import styles from "../../../src/styles/ChatHeader.module.css";
+import { ChatHeaderProps } from "../../domain/models/interfaces/IChatHeaderProps";
 
 const AI_LIMIT = 10;
-
-interface ChatHeaderProps {
-  usedMessages: number;
-}
 
 export const ChatHeader = ({ usedMessages }: ChatHeaderProps) => (
   <header className={styles.header}>

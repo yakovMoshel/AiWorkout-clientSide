@@ -1,14 +1,7 @@
-
-import { IMessage } from "src/domain/models/interfaces/Ichat";
 import styles from "../../../src/styles/ChatMessageList.module.css";
 import { ChatBubble, TypingBubble } from "../molecules/ChatBubble";
 import { useAutoScroll } from "src/hooks/useAutoScroll";
-
-interface ChatMessageListProps {
-  messages: IMessage[];
-  loading: boolean;
-  error: string | null;
-}
+import { ChatMessageListProps } from "../../domain/models/interfaces/IChatMessageListProps";
 
 export const ChatMessageList = ({ messages, loading, error }: ChatMessageListProps) => {
   const bottomRef = useAutoScroll([messages, loading]);

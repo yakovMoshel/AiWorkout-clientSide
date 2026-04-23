@@ -1,6 +1,8 @@
+import { FormData } from "./IFormData";
+
 export interface SetupFormProps {
   step: number;
-  formData: any;
+  formData: FormData;
   pending: boolean;
   stepError: string;
   submitError: string;

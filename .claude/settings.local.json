@@ -9,7 +9,11 @@
       "Bash(git merge:*)",
       "Bash(git push:*)",
       "Read(//c/Full-Stack/Ai-Workout/Project-Ai-Workuot/server/**)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(ls src/components/interfaces/)",
+      "Bash(cat src/components/interfaces/AuthTabsInterfaces.ts)",
+      "Bash(git mv *)",
+      "Bash(npm run *)"
     ],
     "additionalDirectories": [
       "c:\\Full-Stack\\Ai-Workout\\Project-Ai-Workuot\\server\\src\\api\\models",

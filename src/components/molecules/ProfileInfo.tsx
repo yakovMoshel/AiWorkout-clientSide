@@ -1,17 +1,7 @@
 import React from "react";
 import styles from "../../styles/ProfileInfo.module.css";
 import Avatar from "../atoms/Avatar";
-
-interface ProfileInfoProps {
-  name: string;
-  email: string;
-  age?: number;
-  height?: number;
-  weight?: number;
-  targetWeight?: number;
-  goal?: string;
-  image?: string;
-}
+import { ProfileInfoProps } from "../../domain/models/interfaces/IProfileInfoProps";
 
 const GOAL_LABELS: Record<string, string> = {
   weight_loss: "Weight Loss",
@@ -39,7 +29,6 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({
 
   return (
     <div className={styles.card}>
-      {/* Hero section */}
       <div className={styles.hero}>
         <div className={styles.avatarWrap}>
           <Avatar image={image} />
@@ -50,7 +39,6 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({
         </div>
       </div>
 
-      {/* Stats grid */}
       <div className={styles.statsGrid}>
         {stats.map((s) => (
           <div key={s.label} className={styles.statCard}>

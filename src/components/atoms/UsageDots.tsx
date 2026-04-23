@@ -1,13 +1,12 @@
 import styles from "../../../src/styles/UsageDots.module.css";
+import { UsageDotsProps } from "../../domain/models/interfaces/IUsageDotsProps";
 
-interface UsageDotsProps {
-  total: number;
-  used: number;
-}
+const DANGER_THRESHOLD = 3;
+const WARN_THRESHOLD = 6;
 
 export const UsageDots = ({ total, used }: UsageDotsProps) => {
   const remaining = total - used;
-  const level = remaining <= 3 ? "danger" : remaining <= 6 ? "warn" : "ok";
+  const level = remaining <= DANGER_THRESHOLD ? "danger" : remaining <= WARN_THRESHOLD ? "warn" : "ok";
 
   return (
     <div className={styles.wrapper}>

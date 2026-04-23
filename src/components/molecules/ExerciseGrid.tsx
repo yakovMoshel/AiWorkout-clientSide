@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "../../styles/WorkoutPlanDisplay.module.css";
-import { WorkoutPlanExercise } from "../../domain/models/interfaces/IWorkoutPlanExercise";
-
-interface ExerciseGridProps {
-  exercises: WorkoutPlanExercise[];
-}
+import { ExerciseGridProps } from "../../domain/models/interfaces/IExerciseGridProps";
 
 export default function ExerciseGrid({ exercises }: ExerciseGridProps) {
   return (

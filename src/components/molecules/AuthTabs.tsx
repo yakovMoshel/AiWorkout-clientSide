@@ -4,7 +4,7 @@ import styles from "../../styles/AuthTabs.module.css";
 import LoginForm from "../organisms/LoginForm";
 import RegisterForm from "../organisms/RegisterForm";
 
-import type { Tab, AuthTabsProps } from "../interfaces/AuthTabsInterfaces";
+import type { Tab, AuthTabsProps } from "../../domain/models/interfaces/IAuthTabs";
 
 export default function AuthTabs({ loginProps, registerProps, defaultTab = "login" }: AuthTabsProps) {
   const [activeTab, setActiveTab] = useState<Tab>(defaultTab);

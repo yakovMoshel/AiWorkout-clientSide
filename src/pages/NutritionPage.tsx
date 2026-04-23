@@ -97,7 +97,7 @@ export default function NutritionPage() {
           {/* Meals for selected day */}
           {todayMeals ? (
             <div className={styles.mealList}>
-              {Object.entries(todayMeals).map(([mealName, dish]: [string, any]) => {
+              {Object.entries(todayMeals).map(([mealName, dish]) => {
                 const ingredients: string[] = Array.isArray(dish?.ingredients)
                   ? dish.ingredients
                   : [];

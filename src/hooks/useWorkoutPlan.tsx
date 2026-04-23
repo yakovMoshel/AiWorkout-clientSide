@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
-import { Exercise } from "../domain/models/interfaces/IExercise";
 import api from "../utils/api";
 import { useAuth } from "../store/auth-context";
-
-export interface WorkoutDay {
-  day: string;
-  exercises: Exercise[];
-}
+import { WorkoutDay } from "../domain/models/interfaces/IWorkoutDay";
 
 export function useWorkoutPlan() {
   const [workouts, setWorkouts] = useState<WorkoutDay[]>([]);

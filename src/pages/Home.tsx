@@ -4,6 +4,8 @@ import { useAuth } from "../store/auth-context";
 import CalendarReminderDialog from "src/components/organisms/CalendarReminderDialog";
 import { useEffect, useState } from "react";
 
+const POPUP_DELAY_MS = 2500;
+
 export default function Home() {
   const { user, loading } = useAuth();
   const [showPopup, setShowPopup] = useState(false);
@@ -17,7 +19,7 @@ export default function Home() {
         const timer = setTimeout(() => {
           setShowPopup(true);
           localStorage.setItem(popupShownKey, "true");
-        }, 2500);
+        }, POPUP_DELAY_MS);
         return () => clearTimeout(timer);
       }
     }

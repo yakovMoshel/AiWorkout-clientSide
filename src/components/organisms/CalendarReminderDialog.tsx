@@ -1,9 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
-interface CalendarReminderDialogProps {
-  open: boolean;
-  onClose: () => void;
-}
+import { CalendarReminderDialogProps } from "../../domain/models/interfaces/ICalendarReminderDialogProps";
 
 export default function CalendarReminderDialog({
   open,

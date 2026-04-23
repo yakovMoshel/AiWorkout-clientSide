@@ -1,10 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import api from "../utils/api";
-
-export interface SetLog {
-  weight: number;
-  reps: number;
-}
+import { SetLog } from "../domain/models/interfaces/ISetLog";
 
 export function useExerciseLog(exerciseName: string) {
   const [previousSets, setPreviousSets] = useState<SetLog[]>([]);

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/auth-context";
 import { getNutritionPlan } from "../services/nutritionService";
+import { NutritionPlan } from "../domain/models/interfaces/INutritionPlan";
+import { NutritionMealDish } from "../domain/models/interfaces/INutritionMealDish";
 
 export function useNutritionPlan() {
-  const [nutritionPlan, setNutritionPlan] = useState<any>(null);
-  const [weeklyMealPlan, setWeeklyMealPlan] = useState<Record<string, Record<string, any>> | null>(null);
+  const [nutritionPlan, setNutritionPlan] = useState<NutritionPlan | null>(null);
+  const [weeklyMealPlan, setWeeklyMealPlan] = useState<Record<string, Record<string, NutritionMealDish>> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

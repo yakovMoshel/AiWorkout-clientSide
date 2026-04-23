@@ -1,13 +1,7 @@
-import { useTextareaResize }  from "src/hooks/useTextareaResize";
+import { useTextareaResize } from "src/hooks/useTextareaResize";
 import styles from "../../../src/styles/ChatInput.module.css";
-import { SendButton } from "./Sendbutton";
-
-interface ChatInputProps {
-  value: string;
-  onChange: (val: string) => void;
-  onSend: () => void;
-  disabled: boolean;
-}
+import { SendButton } from "./SendButton";
+import { ChatInputProps } from "../../domain/models/interfaces/IChatInputProps";
 
 export const ChatInput = ({ value, onChange, onSend, disabled }: ChatInputProps) => {
   const textareaRef = useTextareaResize(value);

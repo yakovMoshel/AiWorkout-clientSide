@@ -1,10 +1,6 @@
 import React from "react";
 import styles from "../../styles/Avatar.module.css";
-
-interface AvatarProps {
-  image?: string;
-  alt?: string;
-}
+import { AvatarProps } from "../../domain/models/interfaces/IAvatarProps";
 
 const Avatar: React.FC<AvatarProps> = ({ image, alt }) => (
   <div className={styles.avatar}>

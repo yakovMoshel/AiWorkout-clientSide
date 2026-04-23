@@ -1,10 +1,7 @@
-import { IMessage } from "src/domain/models/interfaces/Ichat";
 import styles from "../../../src/styles/ChatBubble.module.css";
-import ReactMarkdown from "react-markdown"; 
+import ReactMarkdown from "react-markdown";
 import { TypingIndicator } from "../atoms/TypingIndicator";
-interface ChatBubbleProps { 
-  message: IMessage;
-}
+import { ChatBubbleProps } from "../../domain/models/interfaces/IChatBubbleProps";
 
 export const ChatBubble = ({ message }: ChatBubbleProps) => {
   const isUser = message.role === "user";
@@ -23,9 +20,7 @@ export const ChatBubble = ({ message }: ChatBubbleProps) => {
   );
 };
 
-interface TypingBubbleProps {}
-
-export const TypingBubble = (_: TypingBubbleProps) => (
+export const TypingBubble = () => (
   <div className={`${styles.row} ${styles.assistant}`}>
     <div className={styles.avatar}>✦</div>
     <div className={`${styles.bubble} ${styles.aiBubble}`}>

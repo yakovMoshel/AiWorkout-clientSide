@@ -1,15 +1,4 @@
-// src/api/useGenerateWorkout.ts
-
-interface WorkoutFormData {
-  gender: string;
-  age: string;
-  height: string;
-  weight: string;
-  goal: string;
-  experience: string;
-  trainingDays: string[];
-  healthNotes: string;
-}
+import { WorkoutFormData } from "../domain/models/interfaces/IWorkoutFormData";
 
 export async function generateWorkoutPlan(formData: WorkoutFormData) {
   const url = "https://ai-workout-planner.p.rapidapi.com/ai-workout";
@@ -18,7 +7,7 @@ export async function generateWorkoutPlan(formData: WorkoutFormData) {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY || "", // store in environment variable for security
+      "X-RapidAPI-Key": process.env.REACT_APP_RAPIDAPI_KEY || "",
       "X-RapidAPI-Host": "ai-workout-planner.p.rapidapi.com",
     },
     body: JSON.stringify({

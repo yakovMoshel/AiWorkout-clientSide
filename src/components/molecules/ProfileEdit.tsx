@@ -1,23 +1,18 @@
 import { useRef, useState } from "react";
-import { useAuth } from "../../store/auth-context"; // ← הוסף
-import { editProfile } from "src/services/pofileEdit";
+import { useAuth } from "../../store/auth-context";
+import { editProfile } from "../../services/profileEdit";
 import Avatar from "../atoms/Avatar";
 import InputField from "../atoms/InputField";
 import SelectField from "../atoms/SelectField";
 import styles from "../../styles/ProfileEdit.module.css";
-
-type ProfileEditProps = {
-  image?: string;
-  initialWeight: number;
-  initialGoal: string;
-};
+import { ProfileEditProps } from "../../domain/models/interfaces/IProfileEditProps";
 
 const ProfileEdit: React.FC<ProfileEditProps> = ({
   image,
   initialWeight,
   initialGoal,
 }) => {
-  const { refetchUser } = useAuth(); 
+  const { refetchUser } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | undefined>(image);
   const [message, setMessage] = useState<string | null>(null);
@@ -42,7 +37,7 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
     formData.append("goal", goal);
     try {
       await editProfile(formData);
-      await refetchUser(); // ← הוסף — מעדכן את ה-context
+      await refetchUser();
       setMessage("Profile updated successfully!");
     } catch (err: any) {
       setMessage(err.message);
@@ -51,7 +46,6 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
 
   return (
     <form className={styles.edit} onSubmit={handleSubmit}>
-
       <div style={{ position: "relative", display: "inline-block" }}>
         <Avatar image={preview} />
         <span
@@ -84,14 +78,6 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
         style={{ display: "none" }}
       />
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        name="image"
-        accept="image/*"
-        onChange={handleAvatarChange}
-        style={{ display: "none" }}
-      />
       <label>
         Weight
         <InputField
