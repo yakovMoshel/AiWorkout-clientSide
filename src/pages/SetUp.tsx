@@ -4,6 +4,7 @@ import SetupForm from "../components/organisms/SetupForm";
 import { FormData } from "../domain/models/interfaces/IFormData";
 import { requestWorkoutPlan } from "../services/workoutService";
 import { requestNutritionPlan } from "../services/nutritionService";
+import { subscribeUserToPush } from "../services/pushNotificationService";
 import { useAuth } from "../store/auth-context";
 import styles from "../styles/SetupPage.module.css";
 
@@ -137,6 +138,7 @@ export default function SetupPage() {
         }),
       ]);
       await refetchUser();
+      await subscribeUserToPush().catch(() => {});
       navigate("/");
     } catch (err: any) {
       setSubmitError(err.message || "Something went wrong. Please try again.");
