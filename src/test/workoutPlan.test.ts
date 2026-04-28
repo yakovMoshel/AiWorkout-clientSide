@@ -1,17 +1,16 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, Mock } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useWorkoutPlan } from "../hooks/useWorkoutPlan";
 import { requestWorkoutPlan } from "../services/workoutService";
 import type { WorkoutDay } from "../domain/models/interfaces/IWorkoutDay";
+import api from "../utils/api";
+import { useAuth } from "../store/auth-context";
 
 vi.mock("../utils/api");
 vi.mock("../store/auth-context");
 
-import api from "../utils/api";
-import { useAuth } from "../store/auth-context";
 
-const mockApi = api as { get: ReturnType<typeof vi.fn>; post: ReturnType<typeof vi.fn> };
-const mockUseAuth = useAuth as ReturnType<typeof vi.fn>;
+const mockApi = api as unknown as { get: Mock; post: Mock };const mockUseAuth = useAuth as ReturnType<typeof vi.fn>;
 
 const sampleWorkouts: WorkoutDay[] = [
   {
