@@ -14,7 +14,7 @@ import { AiChatPage } from "./pages/AiChat";
 import ExercisePage from "./pages/ExercisePage";
 import NutritionPage from "./pages/NutritionPage";
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,

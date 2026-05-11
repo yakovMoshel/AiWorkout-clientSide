@@ -8,6 +8,7 @@ import React, {
 import { getCurrentUser, logoutUser } from "../utils/authClient";
 import { User } from "../domain/models/interfaces/IUser";
 import { AuthContextType } from "../domain/models/interfaces/IAuthContextType";
+import { router } from "../App";
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isAuthenticated: false,
@@ -45,7 +46,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       console.error("Logout failed", err);
     } finally {
       setUser(null);
-window.location.href = "/login";
+      router.navigate("/login");
     }
   }, []);
 
