@@ -9,6 +9,7 @@ export default function ExerciseGrid({ exercises }: ExerciseGridProps) {
         <li key={idx} className={styles.exerciseItem}>
           <Link
             to={`/exercise/${encodeURIComponent(exercise.name)}`}
+            state={{ exercise }}
             className={styles.exerciseLink}
           >
             <div className={styles.exerciseImage}>

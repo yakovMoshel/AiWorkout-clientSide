@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useWorkoutPlan } from "../hooks/useWorkoutPlan";
 import { WorkoutPlanExercise } from "../domain/models/interfaces/IWorkoutPlanExercise";
 import WorkoutExerciseCard from "../components/organisms/WorkoutExerciseCard";
@@ -8,13 +8,18 @@ import styles from "../styles/ExercisePage.module.css";
 export default function ExercisePage() {
   const { name } = useParams<{ name: string }>();
   const navigate = useNavigate();
-  const { workouts, loading, error } = useWorkoutPlan();
+  const location = useLocation();
+  const stateExercise = location.state?.exercise as WorkoutPlanExercise | undefined;
+
+  const { workouts, loading, error } = useWorkoutPlan({ enabled: !stateExercise });
 
   const decodedName = name ? decodeURIComponent(name) : "";
 
-  const exercise = workouts
-    .flatMap((day) => day.exercises as unknown as WorkoutPlanExercise[])
-    .find((ex) => ex.name === decodedName);
+  const exercise =
+    stateExercise ??
+    workouts
+      .flatMap((day) => day.exercises as unknown as WorkoutPlanExercise[])
+      .find((ex) => ex.name === decodedName);
 
   const { pr, saveLog } = useExerciseLog(decodedName);
 

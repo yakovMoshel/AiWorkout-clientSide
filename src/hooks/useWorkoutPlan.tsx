@@ -3,14 +3,18 @@ import api from "../utils/api";
 import { useAuth } from "../store/auth-context";
 import { WorkoutDay } from "../domain/models/interfaces/IWorkoutDay";
 
-export function useWorkoutPlan() {
+export function useWorkoutPlan({ enabled = true } = {}) {
   const [workouts, setWorkouts] = useState<WorkoutDay[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(enabled);
   const [error, setError] = useState<string | null>(null);
 
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
+    if (!enabled) {
+      setLoading(false);
+      return;
+    }
     if (!isAuthenticated) {
       setError("User not authenticated");
       setLoading(false);
@@ -41,7 +45,7 @@ export function useWorkoutPlan() {
     };
 
     fetchPlan();
-  }, [isAuthenticated]);
+  }, [enabled, isAuthenticated]);
 
   return { workouts, loading, error };
 }
