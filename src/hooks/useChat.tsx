@@ -19,28 +19,34 @@ export const useChat = ({ initialUsage }: UseChatProps) => {
       if (!trimmed || loading || remaining <= 0) return;
 
       const userMsg: IMessage = { role: "user", content: trimmed };
-      setMessages((prev) => [...prev, userMsg]);
-      setLoading(true);
-      setError(null);
 
-      try {
-        const data = await sendChatMessage(trimmed);
-        const aiMsg: IMessage = { role: "assistant", content: data.reply };
-        setMessages((prev) => [...prev, aiMsg]);
-        setUsedMessages((prev) => prev + 1);
-      } catch (err: any) {
-        const status = err?.response?.status;
-        const message = err?.response?.data?.error;
+      setMessages((prev) => {
+        const updated = [...prev, userMsg];
 
-        if (status === 403) {
-          setUsedMessages(AI_LIMIT);
-          setError(message ?? "You've reached the message limit.");
-        } else {
-          setError(message ?? "Unexpected error, please try again.");
-        }
-      } finally {
-        setLoading(false);
-      }
+        (async () => {
+          setLoading(true);
+          setError(null);
+          try {
+            const data = await sendChatMessage(trimmed, prev);
+            const aiMsg: IMessage = { role: "assistant", content: data.reply };
+            setMessages((current) => [...current, aiMsg]);
+            setUsedMessages((count) => count + 1);
+          } catch (err: any) {
+            const status = err?.response?.status;
+            const message = err?.response?.data?.error;
+            if (status === 403) {
+              setUsedMessages(AI_LIMIT);
+              setError(message ?? "You've reached the message limit.");
+            } else {
+              setError(message ?? "Unexpected error, please try again.");
+            }
+          } finally {
+            setLoading(false);
+          }
+        })();
+
+        return updated;
+      });
     },
     [loading, remaining]
   );
