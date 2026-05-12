@@ -64,19 +64,50 @@ export default function SetupPage() {
     }));
   }
 
-  function isValidStep() {
+  function getStepError(): string {
+    const age = Number(formData.age);
+    const height = Number(formData.height);
+    const weight = Number(formData.weight);
+    const targetWeight = Number(formData.targetWeight);
+
     switch (step) {
-      case 0: return !!formData.gender;
-      case 1: return !!formData.age && +formData.age > 10;
-      case 2: return !!formData.height && +formData.height > 0;
-      case 3: return !!formData.weight && +formData.weight > 0;
-      case 4: return !!formData.goal;
-      case 5: return !!formData.experience;
-      case 6: return formData.trainingDays.length > 0;
-      case 9: return true; // targetWeight is optional
-      case 10: return !!formData.activityLevel;
-      default: return true;
+      case 0:
+        if (!formData.gender) return "Please select a gender.";
+        break;
+      case 1:
+        if (!formData.age) return "Please enter your age.";
+        if (!Number.isInteger(age) || age < 10 || age > 120)
+          return "Age must be a whole number between 10 and 120.";
+        break;
+      case 2:
+        if (!formData.height) return "Please enter your height.";
+        if (height < 50 || height > 300)
+          return "Height must be between 50 and 300 cm.";
+        break;
+      case 3:
+        if (!formData.weight) return "Please enter your weight.";
+        if (weight < 20 || weight > 500)
+          return "Weight must be between 20 and 500 kg.";
+        break;
+      case 4:
+        if (!formData.goal) return "Please select a goal.";
+        break;
+      case 5:
+        if (!formData.experience) return "Please select your experience level.";
+        break;
+      case 6:
+        if (formData.trainingDays.length === 0)
+          return "Please select at least one training day.";
+        break;
+      case 9:
+        if (formData.targetWeight && (targetWeight < 20 || targetWeight > 500))
+          return "Target weight must be between 20 and 500 kg.";
+        break;
+      case 10:
+        if (!formData.activityLevel) return "Please select your activity level.";
+        break;
     }
+    return "";
   }
 
   function fireWorkoutRequest() {
@@ -89,8 +120,9 @@ export default function SetupPage() {
   }
 
   function handleNext() {
-    if (!isValidStep()) {
-      setStepError("Please fill out this field before continuing.");
+    const error = getStepError();
+    if (error) {
+      setStepError(error);
       return;
     }
     setStepError("");
