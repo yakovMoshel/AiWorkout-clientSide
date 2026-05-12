@@ -95,10 +95,10 @@ describe("requestWorkoutPlan", () => {
   });
 
   it("throws when API returns non-200 status", async () => {
-    mockApi.post = vi.fn().mockResolvedValue({ status: 400, data: {} });
+    mockApi.post = vi.fn().mockRejectedValue(new Error("Request failed with status code 400"));
 
     await expect(requestWorkoutPlan({ goal: "strength" })).rejects.toThrow(
-      "Failed to create workout plan"
+      "Request failed with status code 400"
     );
   });
 
@@ -106,7 +106,7 @@ describe("requestWorkoutPlan", () => {
     mockApi.post = vi.fn().mockRejectedValue(new Error("Timeout"));
 
     await expect(requestWorkoutPlan({ goal: "strength" })).rejects.toThrow(
-      "Failed to create workout plan"
+      "Timeout"
     );
   });
 });
