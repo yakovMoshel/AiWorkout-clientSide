@@ -19,7 +19,7 @@ export default function ExercisePage() {
     stateExercise ??
     workouts
       .flatMap((day) => day.exercises as unknown as WorkoutPlanExercise[])
-      .find((ex) => ex.name === decodedName);
+      .find((ex) => ex.name.toLowerCase() === decodedName.toLowerCase());
 
   const { pr, saveLog } = useExerciseLog(decodedName);
 
