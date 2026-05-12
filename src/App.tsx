@@ -13,6 +13,7 @@ import CalendarSetupPage from "./pages/CalendarSetupPage";
 import { AiChatPage } from "./pages/AiChat";
 import ExercisePage from "./pages/ExercisePage";
 import NutritionPage from "./pages/NutritionPage";
+import ErrorBoundary from "./components/templates/ErrorBoundary";
 
 export const router = createBrowserRouter([
   {
@@ -102,9 +103,11 @@ export const router = createBrowserRouter([
 
 function App() {
   return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 
