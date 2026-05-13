@@ -7,7 +7,8 @@ const AUTH_ROUTES = ["/login", "/register", "/setup"];
 export default function Layout() {
   const { pathname } = useLocation();
   const { loading } = useAuth();
-  const isAuthPage = AUTH_ROUTES.includes(pathname);
+  const normalizedPath = pathname.replace(/\/$/, "") || "/";
+  const isAuthPage = AUTH_ROUTES.includes(normalizedPath);
 
   if (loading) {
     return (
