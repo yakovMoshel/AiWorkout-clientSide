@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { SiGooglecalendar } from "react-icons/si";
 import { CalendarReminderDialogProps } from "../../domain/models/interfaces/ICalendarReminderDialogProps";
 
 export default function CalendarReminderDialog({
@@ -12,7 +13,10 @@ export default function CalendarReminderDialog({
   return (
     <dialog open className="calendar-dialog">
       <div className="dialog-content">
-        <h3>Would you like to receive a reminder in your Google Calendar?</h3>
+        <div className="dialog-header">
+          <SiGooglecalendar className="calendar-icon" />
+          <h3>Would you like to receive a reminder in your Google Calendar?</h3>
+        </div>
 
         <div className="dialog-actions">
           <button

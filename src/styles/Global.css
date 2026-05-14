@@ -283,6 +283,19 @@ textarea { resize: vertical; }
   max-width: 460px;
 }
 
+.dialog-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.calendar-icon {
+  font-size: 32px;
+  color: #1a73e8;
+  flex-shrink: 0;
+}
+
 .dialog-actions {
   display: flex;
   gap: 12px;
