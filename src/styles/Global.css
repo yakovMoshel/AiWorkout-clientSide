@@ -274,13 +274,19 @@ textarea { resize: vertical; }
   backdrop-filter: blur(4px);
 }
 
+@keyframes dialogEnter {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);   }
+}
+
 .dialog-content {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  /* border-radius: var(--radius-lg); */
   box-shadow: var(--shadow-lg);
   padding: 24px;
   max-width: 460px;
+  animation: dialogEnter 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .dialog-header {
@@ -291,8 +297,8 @@ textarea { resize: vertical; }
 }
 
 .calendar-icon {
-  font-size: 32px;
-  color: #1a73e8;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
 }
 

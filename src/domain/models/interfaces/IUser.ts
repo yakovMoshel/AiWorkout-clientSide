@@ -9,5 +9,6 @@ export interface User {
   goal: string;
   image?: string;
   aiUsage: number;
-  profileComplete: boolean; 
+  profileComplete: boolean;
+  googleConnected?: boolean;
 }
