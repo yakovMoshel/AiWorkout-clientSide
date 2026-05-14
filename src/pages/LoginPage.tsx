@@ -14,32 +14,39 @@ export default function LoginPage() {
   const defaultTab = searchParams.get("tab") === "register" ? "register" : "login";
 
   const [loginError, setLoginError] = useState("");
+  const [loginLoading, setLoginLoading] = useState(false);
   const [registerError, setRegisterError] = useState("");
   const [registerLoading, setRegisterLoading] = useState(false);
 
   async function handleLogin(formData: { email: string; password: string }) {
-    const res = await loginAction({}, formData);
-    if (res.error) {
-      setLoginError(res.error);
-    } else {
-      setLoginError("");
-      await refetchUser();
-      navigate("/");
+    setLoginLoading(true);
+    try {
+      const res = await loginAction({}, formData);
+      if (res.error) {
+        setLoginError(res.error);
+      } else {
+        setLoginError("");
+        await refetchUser();
+        navigate("/");
+      }
+    } finally {
+      setLoginLoading(false);
     }
   }
 
   async function handleRegister(form: RegisterForm) {
     setRegisterError("");
+    setRegisterLoading(true);
     try {
-      setRegisterLoading(true);
       const { error } = await registerAction({}, form);
-      if (error) throw new Error(error);
+      if (error) {
+        setRegisterError(error);
+        return;
+      }
       await refetchUser();
       setTimeout(() => navigate("/setup"), REDIRECT_DELAY_MS);
-    } catch (err: any) {
-      setRegisterError(
-        err?.response?.data?.message || "Registration failed. Please try again."
-      );
+    } catch {
+      setRegisterError("Registration failed. Please try again.");
     } finally {
       setRegisterLoading(false);
     }
@@ -48,7 +55,7 @@ export default function LoginPage() {
   return (
     <AuthTabs
       defaultTab={defaultTab}
-      loginProps={{ error: loginError, onSubmit: handleLogin }}
+      loginProps={{ loading: loginLoading, error: loginError, onSubmit: handleLogin }}
       registerProps={{ loading: registerLoading, error: registerError, onSubmit: handleRegister }}
     />
   );
