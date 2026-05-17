@@ -6,7 +6,7 @@ export const ChatFooter = ({ input, onChange, onSend, loading, remaining }: Chat
   <footer className={styles.footer}>
     {remaining <= 0 ? (
       <div className={styles.limitBanner}>
-        🚫 נגמרו ההודעות החינמיות שלך. שדרג בקרוב 😉
+        🚫 You've used all your free messages. Upgrade soon 😉
       </div>
     ) : (
       <ChatInput

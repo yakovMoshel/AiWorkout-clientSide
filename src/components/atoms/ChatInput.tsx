@@ -18,13 +18,12 @@ export const ChatInput = ({ value, onChange, onSend, disabled }: ChatInputProps)
       <textarea
         ref={textareaRef}
         className={styles.input}
-        placeholder="כתוב הודעה..."
+        placeholder="Type a message..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={handleKeyDown}
         disabled={disabled}
         rows={1}
-        dir="rtl"
       />
       <SendButton onClick={onSend} disabled={disabled || !value.trim()} />
     </div>

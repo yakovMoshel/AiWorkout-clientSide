@@ -19,7 +19,7 @@ export const UsageDots = ({ total, used }: UsageDotsProps) => {
         ))}
       </div>
       <span className={styles.label}>
-        {remaining > 0 ? `${remaining} הודעות נותרו` : "אין הודעות"}
+        {remaining > 0 ? `${remaining} messages left` : "No messages left"}
       </span>
     </div>
   );
