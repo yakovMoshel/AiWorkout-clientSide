@@ -173,7 +173,14 @@ export default function SetupPage() {
       await subscribeUserToPush().catch(() => {});
       navigate("/");
     } catch (err: any) {
-      setSubmitError(err.message || "Something went wrong. Please try again.");
+      const isRateLimit =
+        (err?.message || '').toLowerCase().includes('rate limit') ||
+        (err?.message || '').toLowerCase().includes('high demand');
+      setSubmitError(
+        isRateLimit
+          ? "We're experiencing high demand. Please try again in a few minutes."
+          : err.message || "Something went wrong. Please try again."
+      );
     } finally {
       setLoading(false);
     }

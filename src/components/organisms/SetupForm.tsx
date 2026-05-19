@@ -236,12 +236,17 @@ export default function SetupForm({
           </>
         ) : (
           <>
+            {pending && (
+              <p className={styles.error} style={{ color: '#888', marginBottom: 8 }}>
+                Creating your personalized workout plan... This may take up to 2 minutes
+              </p>
+            )}
             <StepButton
               type="submit"
               className={styles.submitButton}
               disabled={pending}
             >
-              {pending ? "Saving..." : "Save & Continue"}
+              {pending ? "Please wait..." : "Save & Continue"}
             </StepButton>
 
             {isOptionalStep && !pending && (
