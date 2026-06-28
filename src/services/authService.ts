@@ -39,8 +39,17 @@ export async function registerAction(
 
     return { error: "" };
   } catch (err: any) {
-    return { error: err?.response?.data?.message || "Registration failed" };
+  const data = err?.response?.data;
+  
+  // שגיאות validation מהשרת (array)
+  if (data?.errors && Array.isArray(data.errors)) {
+    const firstError = data.errors[0]?.msg;
+    return { error: firstError || "Validation failed" };
   }
+  
+  // שגיאה כללית
+  return { error: data?.message || "Registration failed" };
+}
 }
 
 

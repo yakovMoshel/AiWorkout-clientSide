@@ -18,7 +18,10 @@
       "Bash(npx web-push *)",
       "Bash(npx tsc *)",
       "Bash(npx ts-node-dev *)",
-      "Bash(npx ts-node *)"
+      "Bash(npx ts-node *)",
+      "Bash(code --install-extension yechielby.claude-code-rtl)",
+      "PowerShell(& \"C:\\\\Users\\\\Nitzan\\\\AppData\\\\Local\\\\Programs\\\\Microsoft VS Code\\\\bin\\\\code.cmd\" --install-extension yechielby.claude-code-rtl)",
+      "Bash(Select-String -Pattern \"icon|lucide|react-icons|heroicon|font-awesome\")"
     ],
     "additionalDirectories": [
       "c:\\Full-Stack\\Ai-Workout\\Project-Ai-Workuot\\server\\src\\api\\models",
