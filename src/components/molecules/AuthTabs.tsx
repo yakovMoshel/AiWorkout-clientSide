@@ -26,7 +26,7 @@ export default function AuthTabs({ loginProps, registerProps, defaultTab = "logi
         </Button>
       </div>
 
-      <div className={styles.content}>
+      <div key={activeTab} className={`${styles.content} ${styles.tabContent}`}>
         {activeTab === "login" ? (
           <LoginForm {...loginProps} error={loginProps.error ?? ""} />
         ) : (
