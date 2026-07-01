@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import StepQuestion from "../molecules/StepQuestion";
 import TrainingDaysSelector from "../molecules/TrainingDaysSelector";
 import InputField from "../atoms/InputField";
@@ -181,6 +181,10 @@ export default function SetupForm({
 }: SetupFormProps) {
   const isNutritionSection = step >= 8;
 
+  const prevStepRef = useRef<number>(step);
+  const isReverse = step < prevStepRef.current;
+  useEffect(() => { prevStepRef.current = step; }, [step]);
+
   return (
     <form onSubmit={onSubmit} className={styles.formContainer}>
       <h2 className={styles.title}>
@@ -192,14 +196,16 @@ export default function SetupForm({
         Step {step + 1} of {questions.length}{isNutritionSection ? " — Nutrition" : " — Workout"}
       </p>
 
-      <StepQuestion
-        label={questions[step].label}
-        input={questions[step].input(formData, onChange, onDaysChange, onRestrictionsChange)}
-      />
+      <div key={step} className={isReverse ? styles.stepReverse : styles.stepContent}>
+        <StepQuestion
+          label={questions[step].label}
+          input={questions[step].input(formData, onChange, onDaysChange, onRestrictionsChange)}
+        />
 
-      {stepError && <p className={styles.error}>{stepError}</p>}
+        {stepError && <p className={styles.error}>{stepError}</p>}
 
-      {submitError && <p className={styles.error}>{submitError}</p>}
+        {submitError && <p className={styles.error}>{submitError}</p>}
+      </div>
 
       <div style={{ marginTop: 20 }}>
         {step > 0 && (
