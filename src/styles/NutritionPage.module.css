@@ -134,6 +134,16 @@
   font-size: 1rem;
 }
 
+/* Day content fade */
+@keyframes dayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.dayContent {
+  animation: dayFadeIn 0.2s ease both;
+}
+
 /* Day selector */
 .daySelector {
   display: flex;

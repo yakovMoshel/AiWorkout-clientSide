@@ -9,15 +9,15 @@ export default function NutritionPage() {
   const { nutritionPlan, weeklyMealPlan, loading, error } = useNutritionPlan();
   const [selectedDay, setSelectedDay] = useState(TODAY);
 
-  if (loading) return <div className={styles.container}><p className={styles.empty}>Loading nutrition plan...</p></div>;
-  if (error) return <div className={styles.container}><p className={styles.empty}>{error}</p></div>;
+  if (loading) return <div className={`${styles.container} animate-enter`}><p className={styles.empty}>Loading nutrition plan...</p></div>;
+  if (error) return <div className={`${styles.container} animate-enter`}><p className={styles.empty}>{error}</p></div>;
 
   // GPT returns flat structure; legacy RapidAPI wrapped in .result
   const result = nutritionPlan?.result ?? nutritionPlan;
 
   if (!result) {
     return (
-      <div className={styles.container}>
+      <div className={`${styles.container} animate-enter`}>
         <h2 className={styles.header}>Nutrition Plan</h2>
         <p className={styles.empty}>No nutrition plan yet. Complete the setup to generate one.</p>
       </div>
@@ -40,7 +40,7 @@ export default function NutritionPage() {
   const todayMeals = weeklyMealPlan?.[selectedDay] ?? null;
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} animate-enter`}>
       <h2 className={styles.header}>Nutrition Plan</h2>
 
       {/* Daily Targets */}
@@ -95,6 +95,7 @@ export default function NutritionPage() {
           </div>
 
           {/* Meals for selected day */}
+          <div key={selectedDay} className={styles.dayContent}>
           {todayMeals ? (
             <div className={styles.mealList}>
               {Object.entries(todayMeals).map(([mealName, dish]) => {
@@ -149,6 +150,7 @@ export default function NutritionPage() {
           ) : (
             <p className={styles.empty}>No meal data for {selectedDay}.</p>
           )}
+          </div>
         </div>
       )}
 
