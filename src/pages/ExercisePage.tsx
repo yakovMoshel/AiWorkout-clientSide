@@ -25,7 +25,7 @@ export default function ExercisePage() {
 
   if (loading) {
     return (
-      <div className={styles.container}>
+      <div className={`${styles.container} animate-enter`}>
         <p className={styles.status}>Loading exercise...</p>
       </div>
     );
@@ -33,7 +33,7 @@ export default function ExercisePage() {
 
   if (error || !exercise) {
     return (
-      <div className={styles.container}>
+      <div className={`${styles.container} animate-enter`}>
         <p className={styles.status}>
           {error ?? `Exercise "${decodedName}" not found.`}
         </p>
@@ -45,7 +45,7 @@ export default function ExercisePage() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} animate-enter`}>
       <button className={styles.back} onClick={() => navigate(-1)}>
         Back
       </button>
