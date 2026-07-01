@@ -33,7 +33,7 @@ export default function WorkoutPlanDisplay({ plan }: WorkoutPlanDisplayProps) {
       )}
 
       <div className={styles.grid}>
-        <div className={styles.card}>
+        <div key={currentDay} className={`${styles.card} animate-enter`}>
           <div className={styles.navigationHeader}>
             <button onClick={goPrev} aria-label="Previous Day">
               &lt;

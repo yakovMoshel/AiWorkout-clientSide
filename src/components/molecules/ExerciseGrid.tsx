@@ -6,7 +6,7 @@ export default function ExerciseGrid({ exercises }: ExerciseGridProps) {
   return (
     <ul className={styles.exerciseList}>
       {exercises.map((exercise, idx) => (
-        <li key={idx} className={styles.exerciseItem}>
+        <li key={idx} className={`${styles.exerciseItem} animate-enter`}>
           <Link
             to={`/exercise/${encodeURIComponent(exercise.name)}`}
             state={{ exercise }}
